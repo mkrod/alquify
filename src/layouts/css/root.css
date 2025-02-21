@@ -1,0 +1,43 @@
+.loading-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--fade-background-color);
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: ease-in-out .375;
+    animation: Move .5s infinite linear;
+    z-index: 998;
+    cursor: not-allowed;
+}
+
+.loading-container.gen_active{
+    display: flex;
+}
+
+.fidget-spinner-1{
+    background-color: var(--accent1);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+.fidget-spinner-2{
+    background-color: var(--accent2);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+@keyframes Move {
+    from{
+        flex-direction: row;
+    }
+    to{
+        flex-direction: row-reverse;
+    }
+}

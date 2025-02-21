@@ -1,0 +1,109 @@
+.auth_index_container{
+    background-color: var(--tab-background);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth_index_contents{
+    height: 400px;
+    background-color: var(--background-color);
+    width: min(100%, 450px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth_index_buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.auth_index_button{
+    height: 35px;
+    width: 60%;
+    border-radius: 10px;
+    font-family: Poppins, sans-serif;
+    font-size: x-small;
+    font-weight: 500;
+    color: var(--color);
+    transition: ease-in-out .3s;
+}
+
+.auth_index_button.sign_in{
+    border: none;
+    background-color: var(--color);
+    color: var(--background-color);
+}
+
+.auth_index_button.sign_up{
+    border: none;
+    background-color: var(--accent1);
+    color: #fff;
+}
+
+.auth_index_button:hover{
+    filter: brightness(1.2);
+}
+
+.auth_index_links{
+    display: flex;
+    flex-direction: column;
+}
+
+.auth_index_continue_with_text_c{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth_index_continue_with_text_line{
+    background-color: var(--color);
+    width: 60%;
+    height: 1px;
+    border-radius: 5px;
+}
+
+.auth_index_continue_with_text{
+    position: absolute;
+    z-index: 1;
+    background-color: var(--background-color);
+    padding: 5px 20px;
+    font-size: x-small;
+    font-weight: 400;
+    font-family: Poppins, sans-serif;
+    cursor: text;
+}
+
+.auth_index_links_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100px;
+    width: 100%;
+}
+
+.auth_index_link_logo{
+    cursor: pointer;
+    transition: ease-in-out .375s;
+}
+
+.auth_index_link_logo:hover{
+    scale: 1.2;
+}
+
+@media (max-width: 768px) {
+    .auth_index_contents{
+        height: 100vh;
+        width: min(100%, 768px);
+        border-radius: 0;
+    }
+}

@@ -1,0 +1,15 @@
+.dash_chat_container{
+    display: flex;
+    width: 100%;
+    height: 96.5vh;
+}
+
+.dash_chat_left_container{
+    width: min(450px, 30%);
+}
+
+.dash_chat_right_container{
+    height: 96.5vh;
+    flex: 1;
+    color: var(--color);
+}
