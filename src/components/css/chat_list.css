@@ -1,0 +1,203 @@
+.chat_list_header{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    border: 0.5px solid transparent;
+    border-right-color: var(--fade-background-color);
+    border-left-color: var(--fade-background-color);
+    border-top-color: var(--fade-background-color);
+    align-items: center;
+    font-size: medium;
+    padding: 0 10px;
+    border-radius: 10px 0 0 0;
+}
+
+.chat_list_header_text{
+    color: var(--color);
+    font-weight: bolder;
+    font-family: Poppins, sans-serif;
+}
+
+.chat_list_header_icon_settings{
+    color: var(--color);
+    margin-left: auto;
+    font-size: larger;
+    cursor: grabbing;
+}
+
+.chat_list_search_container{
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid var(--fade-background-color);
+}
+
+.chat_list_search_box{
+    height: 25px;
+    width: 80%;
+    background-color: transparent;
+    border: 0.5px solid var(--fade-background-color);
+    color: var(--color);
+    caret-color: var(--accent1);
+    outline: none;
+    padding: 0 5px;
+    font-family: Poppins, sans-serif;
+    font-size: x-small;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.chat_list_search_box::placeholder{
+    color: var(--fade-background-color);
+}
+
+.chat_list_msgs_container{
+    overflow: auto;
+    height: calc(95vh - 81px);
+    border-right: 0.5px solid var(--fade-background-color);
+    border-left: 0.5px solid var(--fade-background-color);
+    border-bottom: 0.5px solid var(--fade-background-color);
+}
+
+
+
+.chat_list_msgs_container::-webkit-scrollbar{
+    width: 0px;
+}
+  
+.chat_list_msgs_container::-webkit-scrollbar-track{
+    background-color: var(--fade-background-color);
+}
+  
+.chat_list_msgs_container::-webkit-scrollbar-thumb{
+    background-color: var(--accent2);
+    border-radius: 9999px;
+}
+
+.chat_list_msgs_container::-moz-scrollbar{
+    width: 5px;
+}
+  
+.chat_list_msgs_container::-moz-scrollbar-track{
+    background-color: var(--fade-background-color);
+}
+  
+.chat_list_msgs_container::-moz-scrollbar-thumb{
+    background-color: var(--accent2);
+    border-radius: 9999px;
+}
+
+/* chatlist message*/
+
+.chat_list_msg{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    border-bottom: 0.5px solid var(--fade-background-color);
+    position: relative;
+}
+
+.chat_list_msg_left{
+    width: 20%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.chat_list_image_presence{
+    width: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.chat_list_image{
+    width: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.chat_list_presence{
+    background-color: #00c900;
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+}
+
+/* chat center */
+
+.chat_list_msg_center{
+    width: 60%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: x-small;
+    color: var(--color);
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.chat_list_msg_user{
+    font-weight: bold;
+    height: fit-content;
+}
+
+.chat_list_msg_preview{
+    font-weight: 600;
+    color: var(--text-fade-color);
+    overflow: hidden;
+}
+
+/* right */
+
+.chat_list_msg_right{
+    width: 20%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-small;
+    color: var(--color);
+}
+
+.chat_list_msg_time_date{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    font-weight: bold;
+    font-family: Poppins, sans-serif;
+    color: var(--fade-background-color);
+}
+
+.chat_list_unread_message:not(:empty){
+    min-height: 15px;
+    min-width: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent1);
+    align-self: flex-end;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.chat_list_active_in_view{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--accent1);
+    border-radius: 5px 0 0 5px;
+}

@@ -1,0 +1,66 @@
+.chat_ui_app_feature_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+    font-family: Poppins, sans-serif;
+    color: var(--color);
+}
+
+.chat_ui_app_feature_title{
+    font-weight: bold;
+    font-size: larger;
+    cursor: text;
+}
+
+.chat_ui_app_feature_title_details{
+    font-weight: light;
+    font-size: smaller;
+    color: var(--fade-background-color);
+    cursor: text;
+}
+
+.chat_ui_app_feature_content_container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin-top: 50px;
+}
+
+.chat_ui_app_feature_box{
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+}
+.chat_ui_app_feature_logo{
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    background-color: var(--fade-background-color);
+    border-radius: 50%;
+    cursor: zoom-in;
+}
+
+.chat_ui_app_feature_box_right{
+    display: flex;
+    flex-direction: column;
+}
+
+.chat_ui_app_feature_box_title{
+    font-weight: bold;
+    font-size: small;
+}
+
+.chat_ui_app_feature_box_title:hover{
+    color: var(--accent1);
+    cursor: pointer;
+}
+
+.chat_ui_app_feature_box_text{
+    font-size: x-small;
+    color: var(--text-fade-color);
+    cursor: text;
+}

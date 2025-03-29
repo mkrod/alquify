@@ -1,0 +1,142 @@
+.settings_integration_container{
+    margin-top: 40px;
+    overflow: auto;
+    height: 65vh;
+}
+
+.settings_integration_type{
+    color: #fff;
+    padding: 1px 10px;
+    border-bottom: 0.5px solid var(--text-fade-color);
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 50px;
+    transition: max-height ease-in-out .35s;
+}
+
+.settings_integration_type:first-child{
+    border-top: 0.5px solid var(--text-fade-color);
+}
+
+.settings_integration_type_open{
+    max-height: 250px;
+}
+
+.settings_integration_type_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-family: Poppins, sans-serif;
+    min-height: 50px;
+}
+
+
+.settings_integration_type_header_title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color);
+    font-weight: 600;
+}
+
+
+.integration_icons{
+    color: var(--color);
+}
+
+.integration_image{
+    height: 20px;
+    width: 20px;
+}
+
+
+.settings_integration_type_content{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding-bottom: 10px;
+}
+
+
+.settings_integration_type_content_desc{
+    font-size: larger;
+    font-weight: 500;
+    color: var(--color);
+}
+
+.settings_inegration_script_tag_container{
+    background-color: var(--fade-background-color);
+    height: 100px;
+    text-wrap: wrap;
+    padding: 5px 10px;
+    border: 0.5px solid var(--text-fade-color);
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px var(--fade-background-color);
+    color: var(--color);
+    margin: 10px 0;
+    overflow: auto;
+}
+
+.settings_inegration_script_tag_container code{
+    cursor: text;
+}
+
+.settings_integration_copy_share{
+    margin: 10px 0;
+    width: fit-content;
+    padding: 0 20px;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.settings_integration_copy{
+    height: 30px;
+    width: fit-content;
+    padding: 0 20px;
+    background-color: var(--fade-background-color);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: x-small;
+    color: var(--color);
+    font-family: Poppins, sans-serif;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: filter ease-in-out .275s;
+}
+
+
+.settings_integration_copy:hover{
+    filter: brightness(0.8);
+}
+
+.settings_integration_wordpress_list_container{
+    font-size: larger;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: Poppins, sans-serif;
+    color: var(--color);
+    margin-bottom: 15px;
+}
+
+.settings_integration_nav_link{
+    height: fit-content;
+    width: fit-content;
+    background-color: none !important;
+    background: none !important;
+    margin-top: auto;
+    color: #7878e0 !important;
+    font-size: larger;
+    transition: color ease-in-out .27s;
+}
+
+.settings_integration_nav_link:hover{
+    color: #4949ff !important;
+}

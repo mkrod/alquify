@@ -1,0 +1,38 @@
+
+
+.dash_layout_container{
+    background-color: #242424;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: 100vh;
+    padding: 10px;
+}
+
+.dash_layout_container_2{
+    flex: 1;
+    height: 100%;
+    position: relative;
+}
+
+.dash_layout_connecting_container{
+    position: absolute;
+    top: -100%;
+    right: 50px;
+    background-color: var(--color);
+    color: var(--background-color);
+    height: 40px;
+    padding: 0 20px 0 0;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    font-family: Poppins, sans-serif;
+    transition: ease-in-out 0.2s;
+}
+
+.dash_layout_bar_line{
+    background-color: red;
+    height: 100%;
+    width: 5px;
+}
