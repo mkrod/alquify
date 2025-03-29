@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    https: false, // Enable HTTPS
-  },
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 5173, // Use Railway’s port
+  }
 });
