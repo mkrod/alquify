@@ -16,7 +16,7 @@ const Auth = () => {
     try{
       const res : any = await FbLogin();
 
-      const isLogged = await authUserWithFb(res.id);
+      await authUserWithFb(res.id);
       
     }
     catch(err){

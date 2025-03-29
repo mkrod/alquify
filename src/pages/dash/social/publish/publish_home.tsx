@@ -52,7 +52,7 @@ const PublishHome = () => {
 
 
         <div className="publish_content_container">
-             <Outlet context={{ currentChannel, setQue, que, draft, setDraft, contents, setContents }}/>
+             <Outlet context={{ currentChannel, setCurrentChannel, setQue, que, draft, setDraft, contents, setContents }}/>
         </div>
     </div>
   )

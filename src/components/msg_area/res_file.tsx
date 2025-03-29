@@ -1,5 +1,5 @@
 import React from "react"
-import { defaultMsgDp, serverUri } from "../../constant";
+import { server } from "../../constant";
 
 interface Props { 
     img: [string, string];
@@ -30,7 +30,7 @@ const ResFile : React.FC<Props> = ({ file, img, time, date }) => {
     <div className="chat_widget_main_response_right">
     <div className="chat_widget_main_response_right_file_container">
       <span className="chat_widget_main_response_right_filename no_accent">{ file.length > 10 ? file.slice(0, 10) + "..." : file.slice(0, file.lastIndexOf(".")) }</span>
-      <span className="chat_widget_main_response_right_file_extension" data-url={`${serverUri}/temp/${file}`} onClick={openFile}>{ getFileExtension(file) }</span>
+      <span className="chat_widget_main_response_right_file_extension" data-url={`${server}/temp/${file}`} onClick={openFile}>{ getFileExtension(file) }</span>
     </div>
     <span className="chat_widget_main_response_right_time res">{ time }</span>
     </div>

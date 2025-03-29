@@ -1,5 +1,4 @@
 import React from "react";
-import { defaultMsgDp } from "../../constant";
 
 interface Props{
     img: [string, string];

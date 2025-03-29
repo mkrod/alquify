@@ -20,7 +20,7 @@ interface ChatWizardThirdProps {
   
   
 
-const ChatWizardThird : React.FC<ChatWizardThirdProps> = ({ err, setFile, theme, setTheme, scheme, setScheme, wlcMsg, setWlcMsg, suggestedMsg, setSgMsg }) => {
+const ChatWizardThird : React.FC<ChatWizardThirdProps> = ({ setFile, theme, setTheme, scheme, setScheme, wlcMsg, setWlcMsg, suggestedMsg, setSgMsg }) => {
 
 
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { PiRobotDuotone } from 'react-icons/pi'
 import "./css/app_feature_chat_list.css"
 import { useNavigate } from 'react-router-dom'

@@ -20,6 +20,7 @@ const SettingsShortcuts = () => {
       // fetch the list and save it to the array
       //  then save it to the cache and set expiry for 24hours
       // to prevent persistent and unecessary query to the database...
+      setShortcuts([]) //setShortcut should not be unused so the app will build
     }, [])
 
 

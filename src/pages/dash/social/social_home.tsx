@@ -1,15 +1,14 @@
 import { FaGripVertical, FaPlus, FaWandMagicSparkles } from "react-icons/fa6";
 import "./css/social_home.css";
-import { useState } from "react";
+//import {  useState } from "react";
 import { RiGalleryView2 } from "react-icons/ri";
 
 
 const SocialHome = () => {
-  interface List {
+  //interface List {}
 
-  }
+  //const [list, setList] = useState<List[]>();
 
-  const [list, setList] = useState<List[]>();
 
   return (
     <div className="social_home_container">

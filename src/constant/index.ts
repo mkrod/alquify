@@ -132,7 +132,7 @@ export const sendChatSetupData = async (formData: any) => {
         
     })
 
-    const res = await result.json();
+    await result.json();
 }
 
 

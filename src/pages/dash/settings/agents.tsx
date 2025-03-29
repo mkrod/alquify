@@ -14,14 +14,7 @@ const SettingsShortcuts = () => {
     state: string
   }
 
-  const [agents, setAgents] = useState<Agents[]>([
-    {
-      name: "MkRoD",
-      type: "Owner",
-      text: "",
-      state: "Active"
-    }
-  ])
+  const [agents, setAgents] = useState<Agents[]>([])
 
 
   useEffect(() => {
@@ -29,6 +22,12 @@ const SettingsShortcuts = () => {
     // fetch the list and save it to the array
     //  then save it to the cache and set expiry for 24hours
     // to prevent persistent and unecessary query to the database...
+    setAgents([{
+      name: "MkRoD",
+      type: "Owner",
+      text: "",
+      state: "Active"
+    }]) //setAgent should not be unused so the app will build
   }, [])
 
   return (
