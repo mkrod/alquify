@@ -10,8 +10,10 @@ const OnboardingNavbars = () => {
 
   const navigate = useNavigate();
   const [CurrentPath, setCurrentPath] = useState<string>("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigateTo = (page: string) => {
+    setIsOpen(false);
     document.querySelector(".loading-container")?.classList.add("gen_active");
     //setCurrentPath(page);
     setTimeout(() => {
@@ -24,7 +26,7 @@ const OnboardingNavbars = () => {
     setCurrentPath(location.pathname);
   }, [location]);
  
-  const [isOpen, setIsOpen] = useState(false);
+  
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

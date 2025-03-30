@@ -3,29 +3,21 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    background: linear-gradient(135deg, var(--tab-background), var(--background-color));
     animation: gradientBG 15s ease infinite;
     background-size: 400% 400%;
+    font-family: Poppins, sans-serif;
   }
   
-  .error-content {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    max-width: 500px;
-    width: 90%;
-  }
+
   
   .error-title {
-    font-size: 3.5rem;
-    color: #e63946;
+    color: var(--color);
     margin-bottom: 1rem;
   }
   
   .error-message {
-    color: #6c757d;
+    color: var(--color);
     margin-bottom: 2rem;
     font-size: 1.2rem;
     line-height: 1.6;
@@ -33,7 +25,7 @@
   
   .retry-button {
     padding: 0.9rem 2rem;
-    background-color: #457b9d;
+    background-color: var(--accent1);
     color: white;
     border: none;
     border-radius: 6px;
@@ -44,9 +36,9 @@
   }
   
   .retry-button:hover {
-    background-color: #1d3557;
+    background-color: var(--accent2);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px var(--tab-background);
   }
   
   @keyframes gradientBG {
