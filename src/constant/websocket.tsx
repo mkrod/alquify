@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { server, serverPort, serverUri } from ".";
+import { server } from ".";
 
 // WebSocket Context Type
 interface WebSocketContextType {
