@@ -35,9 +35,11 @@ const DashLayout = () => {
             isLoggedIn()
             .then((isLogged: any) => {
                 if (!isLogged) {
+                    console.log("not-logged in going to auth")
                     navigate("/auth");
                     document.querySelector(".loading-container")?.classList.remove("gen_active");
                 }else{
+                    console.log("logged in staying...")
                     document.querySelector(".loading-container")?.classList.remove("gen_active");
                 }
             })

@@ -103,3 +103,7 @@ li{
   border-radius: 50%; /* Circular shape */
   text-transform: uppercase;
 }
+
+a{
+  text-decoration: none;
+}

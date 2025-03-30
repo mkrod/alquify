@@ -1,51 +1,185 @@
-.o_content_container {
-    height: 250px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 20px;
-    margin-top: 40px;
-}
 
-#onboarding_header_text{
-    font-size: 50px;
-    font-weight: bolder;
+  /* Base Styles */
+  .onboarding-container {
+    background-color: var(--background-color);
+    color: var(--color);
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Hero Section */
+  .hero-section {
     text-align: center;
-    font-family: Poppins, sans-serif;
-}
-
-.o_content_container-btns{
+    padding: 4rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    color: var(--accent1);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--text-fade-color);
+    max-width: 800px;
+    margin: 0 auto 3rem;
+  }
+  
+  /* Feature Tabs */
+  .feature-tabs {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    text-align: center;
-    margin-top: 20px;
-}
-.o_btn.btn-create{
-    padding: 20px 40px;
-    border-radius: 40px;
-    background-color: var(--accent1);
-    color: #fff;
-    font-size: larger;
-    font-family: Poppins, sans-serif;
-    font-weight: bolder;
-    box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.1);
-    transition: ease-in-out .375s;
-}
-
-.o_btn.btn-create:hover{
-    filter: brightness(1.2);
-}
-
-#o_no_credit_req{
-    color: var(--fade-background-color);
-    font-size: smaller;
-}
-
-.o_content_container.o_three{
-    background-color: var(--accent1);
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--tab-background);
+  }
+  
+  .tab-button {
+    padding: 1rem 2rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--text-fade-color);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .tab-button.active {
+    color: var(--accent1);
+    font-weight: 600;
+  }
+  
+  .tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
     width: 100%;
-    min-height: 15vh;
-}
+    height: 3px;
+    background-color: var(--accent1);
+  }
+  
+  /* Feature Content */
+  .feature-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--background-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--tab-background);
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .feature-card {
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: var(--background-color);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px var(--tab-background);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    color: var(--accent1);
+    margin-bottom: 1rem;
+  }
+  
+  .feature-title {
+    font-size: 1.5rem;
+    color: var(--accent1);
+    margin-bottom: 1rem;
+  }
+  
+  .feature-description {
+    color: var(--text-fade-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Steps Section */
+  .steps-section {
+    margin-top: 4rem;
+  }
+  
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+  
+  .step-number {
+    background-color: var(--accent1);
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+  
+  .step-content {
+    flex: 1;
+  }
+  
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem 0;
+  }
+  
+  .primary-button {
+    background-color: var(--accent1);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 1rem;
+  }
+  
+  .primary-button:hover {
+    background-color: var(--accent2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--tab-background);
+  }
+  
+  .secondary-button {
+    background-color: var(--color);
+    color: var(--accent1);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 2px solid var(--accent1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 1rem;
+  }
+  
+  .secondary-button:hover {
+    background-color: var(--background-color);
+    transform: translateY(-2px);
+  }

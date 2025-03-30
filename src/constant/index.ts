@@ -1,6 +1,7 @@
-export const serverUri : string = "http://localhost";
-export const serverPort : string = "3000";
+//export const serverUri : string = "http://localhost";
+//export const serverPort : string = "3000";
 export const server : string = "https://alquify-server-production.up.railway.app";//`${serverUri}:${serverPort}`;
+export const appName: string = "Alquify"
 export const appLogoUri : string = "https://cdn.dribbble.com/users/702789/avatars/normal/62dc313bebbc78f08ffd3076b6228377.png?1646754829";
 export const defaultMsgDp : string = "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png"
 export const GoogleAuthClientID : string = "64306507520-698gofe0ids53msaqromfie3oevk9kq0.apps.googleusercontent.com";

@@ -42,6 +42,7 @@ import PublishHome from './pages/dash/social/publish/publish_home';
 import PublishQueue from './pages/dash/social/publish/queue';
 import PublishDraft from './pages/dash/social/publish/draft';
 import PublishContents from './pages/dash/social/publish/contents';
+import ErrorElement from './components/errorElement';
 
 const App : React.FC = () => {
 
@@ -121,7 +122,9 @@ const App : React.FC = () => {
   )
 
   return (
-    <RouterProvider router={router} />
+    <ErrorElement>
+          <RouterProvider router={router} />
+    </ErrorElement>
   )
 }
 

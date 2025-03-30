@@ -1,70 +1,64 @@
 // onboarding navbars component
-import { NavLink } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './css/o_navbar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from 'react';
+import { appLogoUri, appName } from '../constant';
+import { useEffect, useState } from 'react';
 
 
 const OnboardingNavbars = () => {
+  const location = useLocation();
+
+  const navigate = useNavigate();
+  const [CurrentPath, setCurrentPath] = useState<string>("");
+
+  const navigateTo = (page: string) => {
+    document.querySelector(".loading-container")?.classList.add("gen_active");
+    //setCurrentPath(page);
+    setTimeout(() => {
+      document.querySelector(".loading-container")?.classList.remove("gen_active");
+      navigate(page);
+    }, 1000)
+  }
 
   useEffect(() => {
-    const bars = document.querySelector('.o_nav_container-mobile') as HTMLElement;
-    const menu = document.querySelector('.o_nav_container') as HTMLElement;
-    const xmark = document.querySelector('.o_nav_xmark') as HTMLElement;
-    if(bars && menu){
-     
-      bars.addEventListener('click', () => {
-        menu.style.top = '0';
-      })
-    }
-    if(xmark && menu){
-      xmark.addEventListener('click', () => {
-        menu.style.top = '-100%';
-      })
-    }
-    
-  }, []);  
+    setCurrentPath(location.pathname);
+  }, [location]);
  
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <>
-    <div className="o_nav_container">
-      <div className="o_nav_container-left">
-        <span className="o_nav_name-text">
-          <img src='https://cdn.dribbble.com/users/702789/avatars/normal/62dc313bebbc78f08ffd3076b6228377.png?1646754829' alt='logo' id='logo_o_navbar' />
-          Alquify
-        </span>
-
-        <FontAwesomeIcon icon={faXmark} className='o_nav_xmark' />
-      </div>
-
-      <ul className="o_nav_container-navlinks">
-          <NavLink to="/">
-            <li>Home</li>
-          </NavLink>
-          <NavLink to="/dash">
-            <li>Dashboard</li>
-          </NavLink>
-          <NavLink to="/support">
-            <li>Support</li>
-          </NavLink>
-          <NavLink to="/docs">
-            <li>Docs</li>
-          </NavLink>
-        </ul>
-
-      <div className="o_nav_container-right">
-        <button className="o_nav-btn btn-primary">Get Started</button>
-        <button className="o_nav-btn btn-secondary">Login</button>
-      </div>
+    <nav className="o-navbar">
+    <div className="o-navbar-brand">
+      <img 
+        src={appLogoUri} 
+        alt="App Logo" 
+        className="o-navbar-logo"
+      />
+      <span className="o-navbar-app-name">{appName}</span>
     </div>
-
-
-      <div className="o_nav_container-mobile">
-        <FontAwesomeIcon icon={faBars} />
+    
+    <div className={`o-navbar-links ${isOpen ? 'mobile-open' : ''}`}>
+      <button onClick={() => navigateTo("/")} className={`o-navbar-link ${CurrentPath === '/' && "active"}`}>Home</button>
+      <button onClick={() => navigateTo("/dash")} className={`o-navbar-link ${CurrentPath.startsWith('/dash') && "active"}`}>Dashboard</button>
+      <button onClick={() => navigateTo("/docs")} className={`o-navbar-link ${CurrentPath.startsWith('/docs') && "active"}`}>Docs</button>
+      <button onClick={() => navigateTo("/support")} className={`o-navbar-link ${CurrentPath.startsWith('/support') && "active"}`}>Support</button>
+      <button onClick={() => navigateTo("/demo")} className={`o-navbar-link ${CurrentPath.startsWith('/demo') && "active"}`}>Demo</button>
+    </div>
+    
+    <div className="o-navbar-mobile-menu">
+        <button 
+          className="o-mobile-menu-button"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span className="o-menu-icon">{isOpen ? '✕' : '☰'}</span>
+        </button>
       </div>
-    </>
+  </nav>
   );
 }   
 
