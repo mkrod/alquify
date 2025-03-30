@@ -43,6 +43,7 @@ import PublishQueue from './pages/dash/social/publish/queue';
 import PublishDraft from './pages/dash/social/publish/draft';
 import PublishContents from './pages/dash/social/publish/contents';
 import ErrorBoundary from './components/errorBoundary';
+//import ErrorElement from './components/errorElement';
 
 const App : React.FC = () => {
 
@@ -62,7 +63,9 @@ const App : React.FC = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       
-      <Route path='/' element={<RootLayout />}>
+      <Route path='/' element={<ErrorBoundary> <RootLayout /> </ErrorBoundary>}>
+
+        
           <Route path='*' element={<NotFound />}/>
 
         <Route path='/' element={<OnboardLayout />}>
@@ -74,6 +77,7 @@ const App : React.FC = () => {
 
 
         <Route path='dash' element={<DashLayout />}>
+
                <Route index element={<Home />} />
             <Route path='chats' element={<DashHomeLayout />}>
                <Route index element={<ChatHome />} />
@@ -122,9 +126,7 @@ const App : React.FC = () => {
   )
 
   return (
-    <ErrorBoundary>
       <RouterProvider router={router} />
-    </ErrorBoundary>
   )
 }
 
