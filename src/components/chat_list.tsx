@@ -3,7 +3,7 @@ import './css/chat_list.css';
 import ChatListMsg from "./chat_list_msg";
 import React, { useEffect, useState } from "react";
 import { useWebSocket } from "../constant/websocket";
-import { serverPort, serverUri } from "../constant";
+import { server } from "../constant";
 import EmptyMsg from "./empty_msg";
 
 interface Props {
@@ -34,7 +34,7 @@ const ChatList : React.FC<Props> = ({ currentChat, setCurrentChat, setUser }) =>
 
     useEffect(() => {
         const fetchChats = async () => {
-            const result = await fetch(`${serverUri}:${serverPort}/fetch-message-list`, {
+            const result = await fetch(`${server}/fetch-message-list`, {
                 credentials: "include",
             });
     

@@ -1,4 +1,4 @@
-import { appLogoUri, serverUri } from '../../../../constant';
+import { appLogoUri, server } from '../../../../constant';
 import { FaAngleDown, FaAngleUp, FaCopy, FaShare } from 'react-icons/fa6';
 import { useWebSocket } from '../../../../constant/websocket';
 
@@ -79,7 +79,7 @@ const ScriptTag = ({ isOpen, click }: { isOpen: boolean, click: () => void }) =>
 {`<!-- Alquify Live Chat Widget -->
 <script type="text/javascript">
 (function(d) {
-var s, c, serverUri = "${serverUri}"; // Replace with your actual server URI
+var s, c, serverUri = "${server}"; // Replace with your actual server URI
 var userId = "${JSON.parse(localStorage.getItem("userData") || "{}").user_id}" || "guest"; // Default to 'guest' if no user_id
 var alquify = window.alquify || function() { alquify._.push(arguments) };
 alquify._ = [];
@@ -89,7 +89,7 @@ c.id = "alquify-script-chat-widget";
 c.type = "text/javascript";
 c.charset = "utf-8";
 c.async = true;
-c.src = "${serverUri}/chat-widget/index.js";
+c.src = "${server}/chat-widget/index.js";
 c.setAttribute("data-user-id", userId);                     
 s.parentNode.insertBefore(c, s);
 })(document);

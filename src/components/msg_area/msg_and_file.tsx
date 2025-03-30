@@ -1,5 +1,5 @@
 import React from "react";
-import { serverUri } from "../../constant";
+import { server } from "../../constant";
 
 interface Props { 
     file?: string;
@@ -32,7 +32,7 @@ const MsgandFile : React.FC<Props> = ({ msg, file = "", time, date }) => {
         <span  style={{fontSize: "10px"}} className="chat_widget_main_response_right_filename">
           {file ? (file.length > 10 ? file.slice(0, 10) + "..." : file.slice(0, file.lastIndexOf("."))) : "Unknown File"}
         </span>
-        <span className="chat_widget_main_message_right_file_extension" data-url={`${serverUri}/temp/${file}`} onClick={openFile}>{ getFileExtension(file) }</span>
+        <span className="chat_widget_main_message_right_file_extension" data-url={`${server}/temp/${file}`} onClick={openFile}>{ getFileExtension(file) }</span>
       </div>
     <span className="chat_widget_main_response_right_time">{ time }</span>
     </div>

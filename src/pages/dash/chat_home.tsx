@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { serverPort, serverUri } from '../../constant'
+import { server, } from '../../constant'
 import { useNavigate } from 'react-router-dom'
 import ChatList from '../../components/chat_list';
 import ChatUI from '../../components/in_chat';
@@ -14,7 +14,7 @@ const ChatHome = () => {
             let formData = new FormData();
             formData.append("request_type", "check");
 
-            fetch(`${serverUri}:${serverPort}/reg-chat-data`, {
+            fetch(`${server}/reg-chat-data`, {
                 method: "POST",
                 body: formData,
                 credentials: "include",
