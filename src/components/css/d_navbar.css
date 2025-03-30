@@ -251,3 +251,53 @@ span.dash_tab_link_title{
 
 }
 
+
+a{
+    text-decoration: none;
+    color: var(--color);
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    font-size: smaller;
+}
+
+a.active{
+    background-color: var(--color);
+    color: var(--background-color);
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--accent1);
+}
+
+
+    
+    .o_nav_container-navlinks{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: transparent;
+        gap: 10px;
+        border-radius: 10px;
+        height: 60%;
+    }
+
+    .o_nav_container-navlinks li{
+        display: block;
+        padding: 0;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    a.active{
+        background-color: transparent;
+        color: var(--color);
+        font-weight: 600;
+    }
+
+    a.active:hover{
+        color: var(--accent1);
+    }
+
+

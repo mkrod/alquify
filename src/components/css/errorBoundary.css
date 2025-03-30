@@ -36,7 +36,7 @@
   color: var(--text-fade-color);
   margin-bottom: 24px;
 }
-svg {
+.error_bound_svg {
   margin-bottom: 16px;
 }
 
