@@ -8,6 +8,9 @@ interface State {
   hasError: boolean;
   error?: Error;
 }
+// Assuming you want to get the value from the document's root element
+const root = document.documentElement;
+const background = getComputedStyle(root).getPropertyValue('--background-color').trim();
 
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
@@ -22,6 +25,8 @@ class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("Caught error:", error, errorInfo);
   }
+
+  
 
   render() {
     if (this.state.hasError) {
@@ -108,7 +113,7 @@ class ErrorBoundary extends Component<Props, State> {
       <path fill="#FFF" d="M0 0H1366V800H0z" transform="translate(-448 -158)" />
       <g>
         <g transform="translate(-448 -158) translate(448 157) translate(0 .61)">
-          <mask id="prefix__b" fill="#fff">
+          <mask id="prefix__b" fill={background}>
             <use xlinkHref="#prefix__a" />
           </mask>
           <path
@@ -120,7 +125,7 @@ class ErrorBoundary extends Component<Props, State> {
         <g
           transform="translate(-448 -158) translate(448 157) translate(0 193.645)"
         >
-          <mask id="prefix__d" fill="#fff">
+          <mask id="prefix__d" fill={background}>
             <use xlinkHref="#prefix__c" />
           </mask>
           <path
@@ -140,7 +145,7 @@ class ErrorBoundary extends Component<Props, State> {
         <g 
           transform="translate(-448 -158) translate(448 157) translate(389.862 231.813)"
         >
-          <mask id="prefix__n" fill="#fff">
+          <mask id="prefix__n" fill={background}>
             <use xlinkHref="#prefix__m" />
           </mask>
           <path
@@ -163,7 +168,7 @@ class ErrorBoundary extends Component<Props, State> {
           <g
             transform="translate(-448 -158) translate(448 157) translate(332.51 262.987)"
           >
-            <mask id="prefix__f" fill="#fff">
+            <mask id="prefix__f" fill={background}>
               <use xlinkHref="#prefix__e" />
             </mask>
             <path
@@ -175,7 +180,7 @@ class ErrorBoundary extends Component<Props, State> {
           <g
             transform="translate(-448 -158) translate(448 157) translate(384.066 262.987)"
           >
-            <mask id="prefix__h" fill="#fff">
+            <mask id="prefix__h" fill={background}>
               <use xlinkHref="#prefix__g" />
             </mask>
             <path
@@ -187,7 +192,7 @@ class ErrorBoundary extends Component<Props, State> {
           <g
             transform="translate(-448 -158) translate(448 157) translate(396.056 247.4)"
           >
-            <mask id="prefix__j" fill="#fff">
+            <mask id="prefix__j" fill={background}>
               <use xlinkHref="#prefix__i" />
             </mask>
             <path
@@ -199,7 +204,7 @@ class ErrorBoundary extends Component<Props, State> {
           <g
             transform="translate(-448 -158) translate(448 157) translate(396.056 254.793)"
           >
-            <mask id="prefix__l" fill="#fff">
+            <mask id="prefix__l" fill={background}>
               <use xlinkHref="#prefix__k" />
             </mask>
             <path
@@ -213,7 +218,7 @@ class ErrorBoundary extends Component<Props, State> {
             <g
               transform="translate(-448 -158) translate(448 157) translate(340.903 169.665)"
             >
-              <mask id="prefix__p" fill="#fff">
+              <mask id="prefix__p" fill={background}>
                 <use xlinkHref="#prefix__o" />
               </mask>
               <path
@@ -225,7 +230,7 @@ class ErrorBoundary extends Component<Props, State> {
             <g
               transform="translate(-448 -158) translate(448 157) translate(340.903 168.466)"
             >
-              <mask id="prefix__r" fill="#fff">
+              <mask id="prefix__r" fill={background}>
                 <use xlinkHref="#prefix__q" />
               </mask>
               <path
@@ -240,7 +245,7 @@ class ErrorBoundary extends Component<Props, State> {
             <g
               transform="translate(-448 -158) translate(448 157) translate(326.515 182.854)"
             >
-              <mask id="prefix__t" fill="#fff">
+              <mask id="prefix__t" fill={background}>
                 <use xlinkHref="#prefix__s" />
               </mask>
               <path
@@ -252,7 +257,7 @@ class ErrorBoundary extends Component<Props, State> {
             <g
               transform="translate(-448 -158) translate(448 157) translate(325.316 181.655)"
             >
-              <mask id="prefix__v" fill="#fff">
+              <mask id="prefix__v" fill={background}>
                 <use xlinkHref="#prefix__u" />
               </mask>
               <path
@@ -266,7 +271,7 @@ class ErrorBoundary extends Component<Props, State> {
               
               transform="translate(-448 -158) translate(448 157) translate(344.301 197.242)"
             >
-              <mask id="prefix__z" fill="#fff">
+              <mask id="prefix__z" fill={background}>
                 <use xlinkHref="#prefix__y" />
               </mask>
               <path
@@ -280,7 +285,7 @@ class ErrorBoundary extends Component<Props, State> {
                
               transform="translate(-448 -158) translate(448 157) translate(361.087 197.242)"
             >
-              <mask id="prefix__B" fill="#fff">
+              <mask id="prefix__B" fill={background}>
                 <use xlinkHref="#prefix__A" />
               </mask>
               <path
@@ -294,7 +299,7 @@ class ErrorBoundary extends Component<Props, State> {
                
               transform="translate(-448 -158) translate(448 157) translate(350.495 206.834)"
             >
-              <mask id="prefix__D" fill="#fff">
+              <mask id="prefix__D" fill={background}>
                 <use xlinkHref="#prefix__C" />
               </mask>
               <path
@@ -309,7 +314,7 @@ class ErrorBoundary extends Component<Props, State> {
             className="torradeira"
             transform="translate(-448 -158) translate(448 157) translate(325.316 218.624)"
           >
-            <mask id="prefix__x" fill="#fff">
+            <mask id="prefix__x" fill={background}>
               <use xlinkHref="#prefix__w" />
             </mask>
             <path
@@ -334,7 +339,7 @@ class ErrorBoundary extends Component<Props, State> {
            
           transform="translate(-448 -158) translate(448 157) translate(272.561 215.226)"
         >
-          <mask id="prefix__F" fill="#fff">
+          <mask id="prefix__F" fill={background}>
             <use xlinkHref="#prefix__E" />
           </mask>
           <path className="tomada"
@@ -347,7 +352,7 @@ class ErrorBoundary extends Component<Props, State> {
            
           transform="translate(-448 -158) translate(448 157) translate(246.184 208.033)"
         >
-          <mask id="prefix__H" fill="#fff">
+          <mask id="prefix__H" fill={background}>
             <use xlinkHref="#prefix__G" />
           </mask>
           <path className="tomada"

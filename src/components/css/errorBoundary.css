@@ -11,7 +11,7 @@
 }
 .error-title {
   max-width: 529px; 
-  font-family: Roboto;
+  font-family: Inconsolata, sans-serif;
   font-size: 38px;
   font-weight: bold;
   font-stretch: normal;
@@ -19,13 +19,13 @@
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #4b4b62;
+  color: var(--color);
   margin-bottom: 16px;
 }
 
 .error-subtitle {
   max-width: 568px; 
-  font-family: Roboto;
+  font-family: Inconsolata, sans-serif;
   font-size: 16px;
   font-weight: normal;
   font-stretch: normal;
@@ -33,7 +33,7 @@
   line-height: 1.31;
   letter-spacing: normal;
   text-align: center;
-  color: #4b4b62;
+  color: var(--text-fade-color);
   margin-bottom: 24px;
 }
 svg {
