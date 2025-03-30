@@ -15,7 +15,7 @@ export const XClient: string = "";
 export const startSession = async () => {
     const res = await fetch(`${server}/start-session`, { method: "POST", credentials: "include", headers: { "Content-type": "application/json" }});
     const response = await res.json();
-    console.log(response.data.isLoggedIn)
+    console.log("sessionStarted: ", response.data.isLoggedIn)
     return response.data.isLoggedIn;
 }
 
@@ -23,7 +23,7 @@ export const isLoggedIn = async () => {
 
     const res = await fetch(`${server}/is-logged-in`, { method: "POST", credentials: "include", headers: { "Content-type": "application/json" }});
     const response = await res.json();
-    console.log(response.data.isLoggedIn)////
+    console.log("isLoggedIn: ", response.data.isLoggedIn)////
     return response.data.isLoggedIn;
 }
 
