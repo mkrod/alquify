@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
-import { serverPort, serverUri } from ".";
+import { server, serverPort, serverUri } from ".";
 
 // WebSocket Context Type
 interface WebSocketContextType {
@@ -50,9 +50,9 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             }
 
             console.log("Connecting to WebSocket...");
-            const wsUrl = new URL(serverUri);
-            const socketInstance = new WebSocket(`ws://${wsUrl.hostname}:${serverPort}`);
-
+            const wsUrl = new URL(server);
+            const socketInstance = new WebSocket(`${wsUrl.protocol.replace('http', 'ws')}//${wsUrl.hostname}`);
+            
             socketRef.current = socketInstance;
             setSocket(socketInstance);
 
