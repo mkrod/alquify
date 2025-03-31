@@ -1,0 +1,7 @@
+.new_social_task_container{
+    height: 290px;
+    width: min(25%, 250px);
+    border: 0.5px solid var(--tab-background);
+    box-shadow: 0 0 5px var(--tab-background);
+    border-radius: 10px;
+}

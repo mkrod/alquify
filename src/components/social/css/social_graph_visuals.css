@@ -1,0 +1,101 @@
+.social_graph_visual_container{
+    width: 50%;
+    border: 0.5px solid var(--tab-background);
+    box-shadow: 0 0 10px var(--tab-background);
+    padding: 0 15px;
+    border-radius: 15px;
+}
+
+.social_graph_visual_top{
+    padding: 15px 0;
+    border-bottom: 0.5px solid var(--tab-background);
+    color: var(--color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: small;
+}
+
+.social_graph_visual_top_left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.social_graph_visual_top_left_left_icon{
+    background-color: #02ff0f25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.social_graph_visual_top_left_title{
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
+    color: var(--text-fade-color);
+    font-size: 12px;
+}
+
+.social_graph_visual_top_right{
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.socal_graph_visual_top_right_dropdown{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    background-color: #02ff0f25;
+    color: green;
+    font-size: smaller;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.socal_graph_visual_top_right_dropdown_options_container{
+    position: absolute;
+    top: 30px;
+    background-color: var(--background-color);
+    border: 0.5px solid var(--tab-background);
+    box-shadow: 0 0 5px var(--tab-background);
+    width: fit-content;
+    border-radius: 5px;
+    right: 0;
+    font-family: Poppins, sans-serif;
+    font-size: smaller;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    scale: 0;
+    opacity: 0;
+    transition: opacity ease-in-out .375s;
+}
+
+.socal_graph_visual_top_right_dropdown_option{
+    color: var(--text-fade-color);
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 0.5px solid var(--tab-background);
+    cursor: pointer;
+}
+
+.socal_graph_visual_top_right_dropdown_options_container.open_followers_period_option{
+    scale: 1;
+    opacity: 1;
+}
+
+.social_graph_visual_bottom{
+    padding: 10px 0;
+}

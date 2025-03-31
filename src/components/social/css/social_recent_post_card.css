@@ -1,0 +1,130 @@
+.social_recent_post_cards_container{
+    display: flex;
+    flex-direction: column;
+    min-width: 75%;
+    max-width: 100%;
+    box-shadow: 0 0 20px var(--tab-background);
+    border: 0.5px solid var(--tab-background);
+    height: fit-content;
+    border-radius: 15px;
+    padding: 0 15px;
+}
+
+.social_recent_post_cards_top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color);
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--tab-background);
+}
+
+.social_recent_post_cards_top_left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.social_recent_post_cards_top_left_icon{
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.social_recent_post_cards_top_left_title{
+    font-weight: 600;
+    font-size: smaller;
+    font-family: Poppins, sans-serif;
+    color: var(--text-fade-color);
+}
+
+
+.social_recent_post_cards_top_right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+    gap: 5px;
+}
+
+.social_recent_post_cards_top_right_navigate{
+    background-color: #02ff0f25;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+    border: 0.5px solid var(--tab-background);
+}
+
+.social_recent_post_cards_top_right_navigate:disabled{
+    opacity: 0.4;
+}
+
+.social_recent_post_cards_down{
+    padding: 10px  0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.social_post_card_container {
+    width: 25%;
+    min-height: 220px;
+    height: 220px;
+    border: 0.5px solid var(--tab-background);
+    border-radius: 10px;
+    box-shadow: 0 0 2px var(--tab-background);
+    overflow: hidden;
+}
+
+.social_post_card_thumbnail_container{
+    height: 50%;
+    width: 100%;
+    background-color: var(--tab-background);
+    box-shadow: 0 0 5px var(--text-fade-color);
+}
+
+.social_post_card_thumbnail{
+    color: var(--color);
+    font-family: Poppins, sans-serif;
+    font-size: x-small;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.social_post_card_tags_container{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding: 5px 10px;
+}
+
+.social_post_card_tag{
+    font-family: Poppins, sans-serif;
+    font-size: xx-small;
+    font-weight: 500;
+    color: var(--text-fade-color);
+    background-color: var(--tab-background);
+    padding: 2px 5px;
+    border-radius: 10px;
+}
+
+.social_post_card_title_container{
+    color: var(--text-fade-color);
+    font-family: Poppins, sans-serif;
+    font-size: smaller;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.social_post_card_date_container{
+    color: var(--fade-background-color);
+    font-size: smaller;
+    font-weight: 600;
+    padding: 10px;
+    font-family: Poppins, sans-serif;
+}

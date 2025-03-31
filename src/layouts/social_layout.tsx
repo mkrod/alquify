@@ -1,7 +1,7 @@
 import { FaFacebook, FaPlus } from 'react-icons/fa6'
 import { NavLink, Outlet } from 'react-router-dom'
 import "./css/social_layout.css";
-import { PiNotePencilBold } from 'react-icons/pi';
+import { PiNotePencilBold, PiVisorThin } from 'react-icons/pi';
 import { IoGrid } from 'react-icons/io5';
 import * as ReactIcons from 'react-icons/fa6';
 import React, { useEffect, useState } from 'react';
@@ -282,6 +282,7 @@ const SocialLayout = () => {
     }, [])
 
 
+    const [platformShowing, setPlatformShowing] = useState<string>("All")
 
 
   return (
@@ -292,7 +293,7 @@ const SocialLayout = () => {
                     Publish
                 </NavLink>
                 <NavLink className='social_home_navbar_links' end to="">
-                    Create
+                    Board
                 </NavLink>
                 <NavLink className='social_home_navbar_links' end to="analyse">
                     Analyse
@@ -345,6 +346,19 @@ const SocialLayout = () => {
                     }
 
                         <div className='social_home_navbar_link_item_options'>
+                          <div className='social_home_navbar_link_item_option' onClick={() => {
+                            document.querySelector(".loading-container")?.classList.add("gen_active");
+
+                            setTimeout(() => {
+                                (document.querySelector(".social_home_navbar_link_item_options") as HTMLDivElement || null)?.classList?.remove("intersecting");
+                                setPlatformShowing(channelOptioning)
+                                document.querySelector(".loading-container")?.classList.remove("gen_active");
+                            }, 2000);
+                            
+                            }}>
+                            <PiVisorThin color='blue' />
+                            <span className='social_home_navbar_link_item_option_label'>Sort</span>
+                          </div>
                           <div className='social_home_navbar_link_item_option'>
                             <ReactIcons.FaGear color='green' />
                            <span className='social_home_navbar_link_item_option_label'>Settings</span>
@@ -406,7 +420,7 @@ const SocialLayout = () => {
         </div>
 
         <div className="social_home_container">
-         <Outlet />
+         <Outlet context={{platformShowing, setPlatformShowing}} />
         </div>
 
 

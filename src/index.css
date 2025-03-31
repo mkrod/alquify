@@ -25,16 +25,20 @@
   user-select: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body::-webkit-scrollbar{
   width: 5px;
 }
 
 body::-webkit-scrollbar-track{
-  background-color: var(--fade-background-color);
+  background-color: var(--tab-background);
 }
 
 body::-webkit-scrollbar-thumb{
-  background-color: var(--accent2);
+  background-color: var(--accent1);
   border-radius: 9999px;
 }
 body::-moz-scrollbar{
@@ -42,11 +46,11 @@ body::-moz-scrollbar{
 }
 
 body::-moz-scrollbar-track{
-  background-color: var(--fade-background-color);
+  background-color: var(--tab-background);
 }
 
 body::-moz-scrollbar-thumb{
-  background-color: var(--accent2);
+  background-color: var(--accent1);
   border-radius: 9999px;
 }
 

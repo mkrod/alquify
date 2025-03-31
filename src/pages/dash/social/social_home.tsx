@@ -1,14 +1,19 @@
-import { FaGripVertical, FaPlus, FaRegNoteSticky, FaWandMagicSparkles } from "react-icons/fa6";
+import { FaPlus, FaRegNoteSticky, FaWandMagicSparkles } from "react-icons/fa6";
 import "./css/social_home.css";
 //import {  useState } from "react";
-import { RiGalleryView2 } from "react-icons/ri";
+import { RiGroupLine } from "react-icons/ri";
 import SocialFeatureCard from "../../../components/social/social_home_card";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiThumbsUp } from "react-icons/fi";
 import { BiCommentDetail, BiShare } from "react-icons/bi";
+import SocialRecentPostCard from "../../../components/social/social_recent_post_card";
+import NewSocialTask from "../../../components/social/new_social_task";
+import SocialGraphVisuals from "../../../components/social/social_graph_visuals";
+import { PiPlugsConnectedDuotone } from "react-icons/pi";
+import { useOutletContext } from "react-router-dom";
 
 
-const SocialHome = () => {
+const SocialHome : React.FC = ({}) => {
   //interface List {}
 
   //const [list, setList] = useState<List[]>();
@@ -21,7 +26,18 @@ const SocialHome = () => {
             prev: string;
         }
   }
+
+  interface OutletContext {
+    platformShowing: string;
+    setPlatformShowing: (value: string) => void;
+  }
+  let { platformShowing, setPlatformShowing } = useOutletContext<OutletContext>();
+
+  
+
+
   const [analytics, setAnalytics] = useState<Analytics[]>([]);
+  const [recentPosts, setRecentPost] = useState<Record<string, any>[]>([])
 
   useEffect(() => {
     setAnalytics([
@@ -65,29 +81,67 @@ const SocialHome = () => {
   }, []);
 
 
+  useEffect(() => {
+    setRecentPost([
+    {
+      thumbnail: "https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_3840,h_2880,g_auto/f_auto/q_auto/v1/images/mountain?_a=BAVAZGBy0",
+      title: "Most visited place in bangladesh",
+      tags: ["travel", "city"],
+      date: "24, Tue Sep",
+      platform: "facebook"
+    },
+    {
+      thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiKXYOn509GNZR1RY1dgn0ml-mTja0lpNueC7GqlOgik-b2EYF8XcMfH6KG4tej06ZT6E&usqp=CAU",
+      title: "Most visited place in bangladesh",
+      tags: ["travel", "city"],
+      date: "24, Tue Sep",
+      platform: "instagram"
+    },
+    {
+      thumbnail: "https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_3840,h_2880,g_auto/f_auto/q_auto/v1/images/mountain?_a=BAVAZGBy0",
+      title: "Most visited place in bangladesh",
+      tags: ["travel", "city"],
+      date: "24, Tue Sep",
+      platform: "linkedin"
+    },
+    {
+      thumbnail: "https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_3840,h_2880,g_auto/f_auto/q_auto/v1/images/mountain?_a=BAVAZGBy0",
+      title: "Most visited place in bangladesh",
+      tags: ["travel", "city"],
+      date: "24, Tue Sep",
+      platform: "x"
+    },  
+  ]);
+  }, [])
+
+
   return (
     <div className="social_home_container">
         <div className="publish_header_content_container">
             <div className="publish_header_left_container">
                 <FaWandMagicSparkles size={25} className='publish_header_left_icon' />
-                <span className='publish_header_left_text'>Create</span>
+                <span className='publish_header_left_text'>Board</span>
             </div>
+
+            <div className="social_home_header_path">
+              <span className="social_home_header_path_base" onClick={() => {
+                if(platformShowing  === "All") return;
+                document.querySelector(".loading-container")?.classList.add("gen_active");
+                setTimeout(() => {
+                  setPlatformShowing("All")
+                  document.querySelector(".loading-container")?.classList.remove("gen_active");
+                }, 1000);
+              }}>Dashboard/</span>
+              <span className="social_home_header_path_current">{platformShowing.charAt(0).toUpperCase() + platformShowing.slice(1)}</span>
+            </div>
+
+
 
 
             <div className="social_header_right_container">
               <div className="social_home_header_right_generate_idea_button">
                 <FaWandMagicSparkles color="#008000" />
                 AI Idea
-              </div>
-              <div className="social_home_header_right_tabs_view_switch_container">
-                <span className="social_home_header_right_tabs_view_switch list">
-                  <FaGripVertical />
-                  List
-                </span>
-                <span className="social_home_header_right_tabs_view_switch gallery active">
-                <RiGalleryView2 />
-                  Gallery
-                </span>
               </div>
 
               <span className="social_home_header_right_button">
@@ -100,7 +154,9 @@ const SocialHome = () => {
 
 
         <div className="social_home_content_top_feature_cards">
-          {analytics.map((item: Analytics, index: number) => (
+          {analytics.map((item: Analytics, index: number) => {
+            //use  platformShowing prop to filter the data that is being passed i.e if(item.id === platformShowing) item.id or so will have value like facebook, instagram , x, etc
+            return (
             <SocialFeatureCard 
               key={index}
               title={item.title}
@@ -108,7 +164,26 @@ const SocialHome = () => {
               period={item.period}
               value={item.value}
             />
-          ))}
+          )})}
+        </div>
+
+
+        <div className="social_home_content_recent_posts_container">
+          <SocialRecentPostCard data={recentPosts} platformShowing={platformShowing} cardTitle="Recent Post" />
+          <NewSocialTask />
+        </div>
+
+        <div className="social_home_content_visualization_container">
+          <SocialGraphVisuals
+           title="Followers"
+           icon={<RiGroupLine color="green" size={12} />}
+           data={{}}
+           />
+          <SocialGraphVisuals
+           title="Engagements"
+           icon={<PiPlugsConnectedDuotone color="green" size={12} />}
+           data={{}}
+           />
         </div>
 
 
