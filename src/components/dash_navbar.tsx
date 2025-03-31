@@ -76,6 +76,9 @@ const DashNavbar = () => {
 
       const proFile = document.querySelector(".d_nav_bottom_bar_top") as HTMLElement;
       proFile.style.opacity = "1";
+
+      const theme_container = document.querySelector(".d_nav_bottom_bar_down") as HTMLDivElement;
+      theme_container.classList.remove("close_bar")
       
   }
 
@@ -118,6 +121,9 @@ const DashNavbar = () => {
 
       const proFile = document.querySelector(".d_nav_bottom_bar_top") as HTMLElement;
       proFile.style.opacity = "0";
+
+      const theme_container = document.querySelector(".d_nav_bottom_bar_down") as HTMLDivElement;
+      theme_container.classList.add("close_bar")
      
   }
 
@@ -163,16 +169,19 @@ const DashNavbar = () => {
 
   const [email, setEmail] = useState<string | null>(() => {
     const userData = localStorage.getItem("userData");
-    return userData ? JSON.parse(userData).email : null;
+    return userData ? JSON.parse(userData).email : "Loading...";
   });
 
   useEffect(() => {
+    if(email !== null || email !== "Loading..." || email !== "") return;
     const userData = localStorage.getItem("userData");
     if(userData){
        const parsedUserData = JSON.parse(userData);
-       parsedUserData?.email.length > 19 ? setEmail(parsedUserData?.email.slice(0, 16) + "...") : setEmail(parsedUserData?.email) 
+       parsedUserData?.email?.length > 19 ? setEmail(parsedUserData?.email?.slice(0, 16) + "...") : setEmail(parsedUserData?.email) 
+    }else{
+      setEmail("Loading...")
     }
-  }, []);
+  }, [email]);
 
   return (
     <>

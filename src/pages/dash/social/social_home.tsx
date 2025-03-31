@@ -1,13 +1,68 @@
-import { FaGripVertical, FaPlus, FaWandMagicSparkles } from "react-icons/fa6";
+import { FaGripVertical, FaPlus, FaRegNoteSticky, FaWandMagicSparkles } from "react-icons/fa6";
 import "./css/social_home.css";
 //import {  useState } from "react";
 import { RiGalleryView2 } from "react-icons/ri";
+import SocialFeatureCard from "../../../components/social/social_home_card";
+import { useEffect, useState } from "react";
+import { FiThumbsUp } from "react-icons/fi";
+import { BiCommentDetail, BiShare } from "react-icons/bi";
 
 
 const SocialHome = () => {
   //interface List {}
 
   //const [list, setList] = useState<List[]>();
+  interface Analytics{
+        title: string;
+        icon: React.ReactNode;
+        period: string;
+        value: {
+            current: string;
+            prev: string;
+        }
+  }
+  const [analytics, setAnalytics] = useState<Analytics[]>([]);
+
+  useEffect(() => {
+    setAnalytics([
+      {
+        title: "Total post",
+        icon: <FaRegNoteSticky color="violet" size={15} />,
+        period: "Month",
+        value: {
+          current: "2543",
+          prev: "1997",
+        }
+      },
+      {
+        title: "Average Like",
+        icon: <FiThumbsUp color="blue" size={15} />,
+        period: "Month",
+        value: {
+          current: "244076",
+          prev: "248890",
+        }
+      },
+      {
+        title: "Average comment",
+        icon: <BiCommentDetail color="green" size={15} />,
+        period: "Month",
+        value: {
+          current: "188086",
+          prev: "170679",
+        }
+      },
+      {
+        title: "Average Share",
+        icon: <BiShare color="#FA5A2A" size={15} />,
+        period: "Month",
+        value: {
+          current: "58089",
+          prev: "48484",
+        }
+      }
+    ])
+  }, []);
 
 
   return (
@@ -43,6 +98,18 @@ const SocialHome = () => {
         </div>
 
 
+
+        <div className="social_home_content_top_feature_cards">
+          {analytics.map((item: Analytics, index: number) => (
+            <SocialFeatureCard 
+              key={index}
+              title={item.title}
+              icon={item.icon}
+              period={item.period}
+              value={item.value}
+            />
+          ))}
+        </div>
 
 
 

@@ -29,6 +29,7 @@ const DashLayout = () => {
                 const userEmail = getEmailFromCookie();
                 const userID = getIDFromCookie()
                 const data = { email: userEmail, user_id: userID };
+                console.log("details from server cookie: ", userEmail + "" + userID);
                 localStorage.setItem("userData", JSON.stringify(data));
             }
 
@@ -36,7 +37,7 @@ const DashLayout = () => {
             .then((isLogged: any) => {
                 if (!isLogged) {
                     console.log("not-logged in going to auth")
-                    navigate("/auth");
+                    //navigate("/auth");
                     document.querySelector(".loading-container")?.classList.remove("gen_active");
                 }else{
                     console.log("logged in staying...")
@@ -46,11 +47,11 @@ const DashLayout = () => {
             .catch((err) => {
                 console.log('session_check_error: ', err);
                 document.querySelector(".loading-container")?.classList.remove("gen_active");
-                navigate("/auth");
+                //navigate("/auth");
             })
         } catch (err) {
             console.log("Auth error:", err);
-            navigate("/auth");
+            //navigate("/auth");
             document.querySelector(".loading-container")?.classList.remove("gen_active");
         }
 

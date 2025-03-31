@@ -173,7 +173,23 @@ span.dash_tab_link_title{
     width: auto;
     padding: 5px;
     color: #fff;
+    transition: flex-direction padding width ease-in-out 375s;
 }
+
+.d_nav_bottom_bar_down.close_bar{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    gap: 10px;
+    width: 35px;
+    align-self: center;
+}
+
+.d_nav_bottom_bar_down.close_bar .d_nav_bottom_bar_down_light_container, .d_nav_bottom_bar_down.close_bar  .d_nav_bottom_bar_down_dark_container{
+    padding: 3px;
+}
+
 
 .d_nav_bottom_bar_down_light_container{
     display: flex;
