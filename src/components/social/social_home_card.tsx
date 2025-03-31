@@ -18,7 +18,6 @@ const SocialFeatureCard : React.FC<Props> = ({title, icon, period, value}) => {
     const [subtitle, setSubtitle] = useState<string>("Loading...")
     const [color, setColor] = useState<string>("");
     const [percent, setPercent] = useState<number>(0);
-    const [arrow, setArrow] = useState<string>("");
     const [borderColor, setborderColor] =  useState<string>("");
 
     useEffect(() => {
@@ -27,7 +26,6 @@ const SocialFeatureCard : React.FC<Props> = ({title, icon, period, value}) => {
             const percent_change : number = Math.floor((difference / lastPeriod) * 100);
             setPercent(percent_change);
             setSubtitle(`less than last ${period}`)
-            setArrow("\u2193")
             setborderColor("#ff000098");
             setColor("#ff350225")
         }else if(currentPeriod > lastPeriod){
@@ -35,7 +33,6 @@ const SocialFeatureCard : React.FC<Props> = ({title, icon, period, value}) => {
             const percent_change : number = Math.floor((difference / lastPeriod) * 100);
             setPercent(percent_change);
             setSubtitle(`more than last ${period}`);
-            setArrow("\u2191");
             setborderColor("#00800098");
             setColor("#02ff0f25");
         }else{

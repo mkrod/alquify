@@ -62,3 +62,9 @@
 .social_feature_card_container:hover {
     transform: translateY(-5%);
 }
+
+.social_feature_card_icons{
+    border-radius: 5px;
+    padding: 5px;
+    color: yellow;
+}

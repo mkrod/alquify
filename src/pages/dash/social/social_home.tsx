@@ -27,7 +27,7 @@ const SocialHome = () => {
     setAnalytics([
       {
         title: "Total post",
-        icon: <FaRegNoteSticky color="violet" size={15} />,
+        icon: <FaRegNoteSticky style={{backgroundColor: "#ff20ec27"}} className="social_feature_card_icons" color="#ff20ec" size={25} />,
         period: "Month",
         value: {
           current: "2543",
@@ -36,7 +36,7 @@ const SocialHome = () => {
       },
       {
         title: "Average Like",
-        icon: <FiThumbsUp color="blue" size={15} />,
+        icon: <FiThumbsUp style={{backgroundColor: "#0245ff25"}} className="social_feature_card_icons" color="blue" size={25} />,
         period: "Month",
         value: {
           current: "244076",
@@ -45,7 +45,7 @@ const SocialHome = () => {
       },
       {
         title: "Average comment",
-        icon: <BiCommentDetail color="green" size={15} />,
+        icon: <BiCommentDetail style={{backgroundColor: "#02ff0f25"}} className="social_feature_card_icons" color="green" size={25} />,
         period: "Month",
         value: {
           current: "188086",
@@ -54,7 +54,7 @@ const SocialHome = () => {
       },
       {
         title: "Average Share",
-        icon: <BiShare color="#FA5A2A" size={15} />,
+        icon: <BiShare style={{backgroundColor: "#ff4b1525"}} className="social_feature_card_icons" color="#FA5A2A" size={25} />,
         period: "Month",
         value: {
           current: "58089",
