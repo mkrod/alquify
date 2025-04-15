@@ -5,17 +5,19 @@ import { PiNotePencilBold, PiVisorThin } from 'react-icons/pi';
 import { IoGrid } from 'react-icons/io5';
 import * as ReactIcons from 'react-icons/fa6';
 import React, { useEffect, useState } from 'react';
-import { authorizeFB, authorizeGoogle, authorizeInstagram, authorizeLinkedIn, authorizeTikTok, authorizeTwitter, setUserDetails } from '../constant/auth_socials';
+import { authorizeFB, authorizeGoogle, authorizeLinkedIn, authorizeTwitter, getIGIDWithFbPageId, setUserDetails } from '../constant/auth_socials';
 import { server } from '../constant';
-import { useWebSocket } from '../constant/websocket';
+import { useWebSocket } from '../constant/provider';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
 import SocialConnectedModal from '../components/misc/social_conn_modal';
+import OptionSelector from '../components/social/option_selector';
+import ComposePost from '../components/social/compose_post';
 
 
 const SocialLayout = () => {
 
-    const { socialAccounts, setSocialAccounts, /*addedKeys, removedKeys, socialAccTracker, setSocialAccTracker*/ } = useWebSocket();
+    const { note, setNote, socialAccounts, setSocialAccounts, /*addedKeys, removedKeys, socialAccTracker, setSocialAccTracker*/ } = useWebSocket();
 
     interface Channel {
         id: number;
@@ -56,7 +58,13 @@ const SocialLayout = () => {
             details: 'Connect your Instagram page to start publishing content',
             iconSize: 30,
             iconColor: '#E1306C',
-            onclick: () => authorizeInstagram
+            onclick: () => {
+                //replace with logic to authorize user and redirect to callback @ /auth/instagram/callback then process the token for acessToken
+                //window.location.href = `https://api.instagram.com/oauth/authorize?client_id=${IGClient}&redirect_uri=${server}/auth/instagram/callback&scope=instagram_basic&response_type=code`;
+                window.open(`${server}/auth/instagram/callback`, "_self");
+
+
+            }
         },
         {
             id: 4,
@@ -69,12 +77,15 @@ const SocialLayout = () => {
         },
         {
             id: 5,
-            title: 'Pinterest',
-            icon: 'FaPinterest',
-            details: 'Connect your Pinterest page to start publishing content',
+            title: 'TikTok',
+            icon: 'FaTiktok',
+            details: 'Connect your TikTok page to start publishing content',
             iconSize: 30,
-            iconColor: '#E60023',
-            onclick: () => console.log('Pinterest')
+            iconColor: '#000000',
+            onclick: async () => {
+                window.location.href = `${server}/tiktok/auth`;
+            },
+
         },
         {
             id: 6,
@@ -96,13 +107,12 @@ const SocialLayout = () => {
         },
         {
             id: 8,
-            title: 'TikTok',
-            icon: 'FaTiktok',
-            details: 'Connect your TikTok page to start publishing content',
+            title: 'Pinterest',
+            icon: 'FaPinterest',
+            details: 'Connect your Pinterest page to start publishing content',
             iconSize: 30,
-            iconColor: '#000000',
-            onclick: authorizeTikTok,
-
+            iconColor: '#E60023',
+            onclick: () => console.log('Pinterest')
         },
         {
             id: 9,
@@ -128,16 +138,129 @@ const SocialLayout = () => {
 
    
 
-    const openCreatePost = () => {
 
+
+    interface SelectingOptionFromBackendProp {
+        action: string;
+        data: Pages[];
+        onfinish: (value: string | undefined) => void;
     }
+
+    interface Pages {
+        title: string;
+        id: string,
+        username?: string;
+        name: string;
+        category?: string;
+        picture?: string;
+        platform?: string;
+        type?: string;
+    }
+    const [SelectingOptionFromBackend, setSelectingOptionFromBackend] = useState<SelectingOptionFromBackendProp>({
+        action: "",
+        data: [],
+        onfinish: () => {}
+    });
+
+    useEffect(() => { //for ig linkage proccess
+        const getCookieValue = (name: string) => {
+            const match = document.cookie
+                .split("; ")
+                .find(row => row.startsWith(name + "="));
+            return match ? match.split("=")[1] : null; // Extract only the value
+        }
+
+        const pages_string = getCookieValue("fb_pages");
+        console.log("raw pages_string", pages_string);
+        console.log("raw pages_string", decodeURIComponent(pages_string || ""));
+     
+        const fb_pages: Pages[] = pages_string ? JSON.parse(decodeURIComponent(pages_string)) : null;
+        if (fb_pages) {
+            setSelectingOptionFromBackend({
+                data: fb_pages,
+                action: "add",
+                onfinish: (id: string | undefined) => {
+                    if (!id) return;
+                    document.querySelector(".loading-container")?.classList.add("gen_active");
+                    setTimeout(() => {
+                        //after first render logic
+
+                        getIGIDWithFbPageId(id)
+                        .then((res) => {
+                            if(res.message === "success"){
+                                setSelectingOptionFromBackend({data: [], action: "", onfinish: () => {}});
+                                setSelectingOptionFromBackend({
+                                    data: res.data,
+                                    action: "add",
+                                    onfinish: async (value) => {                                        
+                                        if (!value) {
+                                            setNote("Please Select your account to continue");
+                                            setTimeout(() => setNote(""), 2000);
+                                            return;
+                                        }
+                                        setSelectingOptionFromBackend({data: [], action: "", onfinish: () => {}});
+                                        document.querySelector(".loading-container")?.classList.add("gen_active");
+
+                                        const result = await fetch(`${server}/save-instagram-token`, {
+                                            method: "POST",
+                                            body: JSON.stringify({ ig_bus_id: value }),
+                                            credentials: "include",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                        });
+                                        interface Res {
+                                            message: string;
+                                            data: any;
+                                        }
+                                        if (!result.ok) throw new Error("Failed to save instagram token");
+                                        const res: Res = await result.json();
+                                        if (res.message === "success") {
+                                            setTimeout(() => {
+                                                window.location.reload();
+                                                document.querySelector(".loading-container")?.classList.remove("gen_active");
+                                            }, 2000);
+                                        }else{
+                                            
+                                        }
+                                        //finalize
+
+
+                                    },
+
+                                })
+                            }else{
+                                setNote(res.data.message);
+                                setTimeout(() => setNote(""), 2000);
+                            }
+
+                        })
+                        .catch((err) => {
+                            console.log(err);
+
+                        })
+                        .finally(() => {
+                            document.querySelector(".loading-container")?.classList.remove("gen_active");
+                        });
+                    }, 2000);
+                }
+            });
+
+            document.cookie = "fb_pages=; Max-Age=0"; // Clear the cookie
+        }
+    }, []);
+
+
+
+
+    const [isComposing, setIsComposing] = useState<boolean>(false);
 
     const Option = () => {
         return(
             <div className='social_home_navbar_option_container'>
 
 
-            <div className="social_home_navbar_option_top_item" onClick={openCreatePost}>
+            <div className="social_home_navbar_option_top_item" onClick={() => setIsComposing(true)}>
                 <div className='social_home_navbar_option_top_item_icon'>
                 <PiNotePencilBold size={17} color='green' />
                 </div>
@@ -282,8 +405,13 @@ const SocialLayout = () => {
     }, [])
 
 
-    const [platformShowing, setPlatformShowing] = useState<string>("All")
+    const [platformShowing, setPlatformShowing] = useState<string>("All");
 
+  useEffect(() => {
+    
+
+
+  }, [socialAccounts, /* newPost (create new variable and make it trigger update also after post from here) */]);
 
   return (
     <div className='dash_home_container'>
@@ -420,13 +548,24 @@ const SocialLayout = () => {
         </div>
 
         <div className="social_home_container">
-         <Outlet context={{platformShowing, setPlatformShowing}} />
+         <Outlet context={{platformShowing, setPlatformShowing, setIsComposing}} />
         </div>
 
 
 
         {links.linked !== "" && links.unLinked === "" && <SocialConnectedModal platform={links.linked} action="add" close={() => setLinks((prev : Links) => ({...prev, linked: ""}))} />}
         {links.unLinked !== "" && links.linked === "" && <SocialConnectedModal platform={links.unLinked} action="remove" close={() => setLinks((prev : Links) => ({...prev, unLinked: ""}))} />}
+        {SelectingOptionFromBackend.data && SelectingOptionFromBackend.data.length > 0 && <OptionSelector data={SelectingOptionFromBackend} />}
+
+        {note &&
+        <div style={{top: note !== "" ? "0" : "-100%", zIndex: "10001"}} className="dash_layout_connecting_container">
+          <div style={{backgroundColor: "greenyellow"}} className="dash_layout_bar_line"></div>
+          <div className="dash_layout_connecting_text">{note}</div>
+        </div>}
+
+
+
+        {isComposing && <ComposePost onexit={() => setIsComposing(false)} />}
     </div>
   )
 }

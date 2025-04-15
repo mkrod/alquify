@@ -9,9 +9,10 @@ const PublishDraft = () => {
     interface OutletContext {
         draft: { id: number; content: string }[];
         setDraft:(value: any) => void;
+        setIsComposing: React.Dispatch<React.SetStateAction<boolean>>;
     }
 
-    const { draft, setDraft } = useOutletContext<OutletContext>()
+    const { draft, setDraft, setIsComposing } = useOutletContext<OutletContext>()
 
     useEffect(() => {
         //fetch draft from localstorage and
@@ -27,7 +28,7 @@ const PublishDraft = () => {
             <TbEdit className="que_empty_state_icon" />
             <span className="que_empty_state_text">No Draft</span>
             <span className="que_empty_state_text_fade">Save some draft contents, and they'll appear here</span>
-            <button className="que_empty_state_button">
+            <button onClick={() => setIsComposing(true)} className="que_empty_state_button">
                 <FaPlus size={15} color="#fff" />
                 New Post
             </button>

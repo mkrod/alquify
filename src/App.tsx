@@ -43,6 +43,7 @@ import PublishQueue from './pages/dash/social/publish/queue';
 import PublishDraft from './pages/dash/social/publish/draft';
 import PublishContents from './pages/dash/social/publish/contents';
 import ErrorBoundary from './components/errorBoundary';
+import AnalyseHome from './pages/dash/social/analyse/analyse_home';
 //import ErrorElement from './components/errorElement';
 
 const App : React.FC = () => {
@@ -102,7 +103,7 @@ const App : React.FC = () => {
                  <Route path='contents' element={<PublishContents />} />
                </Route>
                
-               <Route path='analyse' element={<SocialHome />} />
+               <Route path='analyse' element={<AnalyseHome />} />
                <Route path='engage' element={<SocialHome />} />
                <Route path='start-page' element={<SocialHome />} />
             </Route>      

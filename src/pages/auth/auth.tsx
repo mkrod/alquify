@@ -2,7 +2,7 @@ import { FcGoogle } from 'react-icons/fc'
 import './css/auth.css'
 import { FaFacebook, FaXTwitter } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
-import { GoogleAuthClientID, GoogleAuthCallbackURL, FbLogin, googleAuthClient, authUserWithFb } from "../../constant/"
+import { GoogleAuthClientID, GoogleAuthCallbackURL, googleAuthClient } from "../../constant/"
 import { useEffect } from 'react'
 
 const Auth = () => {
@@ -12,17 +12,7 @@ const Auth = () => {
   const googleAuth = () => {
     googleAuthClient(GoogleAuthClientID, GoogleAuthCallbackURL);
   }
-  const fbAuth = async () => {
-    try{
-      const res : any = await FbLogin();
-
-      await authUserWithFb(res.id);
-      
-    }
-    catch(err){
-      console.log("FB-err: ", err)
-    }
-  }
+  const fbAuth = async () => {}
   const XAuth = () => {}
 
   useEffect(() => {

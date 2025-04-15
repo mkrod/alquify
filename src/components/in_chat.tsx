@@ -7,7 +7,7 @@ import { LuBot, LuMessageCircleQuestion } from "react-icons/lu";
 import { GoPaperclip } from "react-icons/go";
 import { FaRegFaceSmile, FaXmark } from "react-icons/fa6";
 import { GrChannel } from "react-icons/gr";
-import { useWebSocket } from "../constant/websocket";
+import { useWebSocket } from "../constant/provider";
 import MsgandFile from "./msg_area/msg_and_file";
 import Message from "./msg_area/message";
 import MesFile from "./msg_area/mes_file";

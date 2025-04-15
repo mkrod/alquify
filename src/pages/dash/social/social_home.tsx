@@ -11,6 +11,8 @@ import NewSocialTask from "../../../components/social/new_social_task";
 import SocialGraphVisuals from "../../../components/social/social_graph_visuals";
 import { PiPlugsConnectedDuotone } from "react-icons/pi";
 import { useOutletContext } from "react-router-dom";
+import { Posts, useWebSocket } from "../../../constant/provider";
+import { sortPostsByTimestamp } from "../../../constant/social_api";
 
 
 const SocialHome : React.FC = ({}) => {
@@ -22,8 +24,8 @@ const SocialHome : React.FC = ({}) => {
         icon: React.ReactNode;
         period: string;
         value: {
-            current: string;
-            prev: string;
+            current: number;
+            prev: number;
         }
   }
 
@@ -32,57 +34,146 @@ const SocialHome : React.FC = ({}) => {
     setPlatformShowing: (value: string) => void;
   }
   let { platformShowing, setPlatformShowing } = useOutletContext<OutletContext>();
+  const { socialPosts } : {socialPosts: Record<string, Posts[]>} = useWebSocket();
 
   
 
 
   const [analytics, setAnalytics] = useState<Analytics[]>([]);
-  const [recentPosts, setRecentPost] = useState<Record<string, any>[]>([])
+  const [recentPosts, setRecentPost] = useState<Posts[]>([]);
+  const [monthsInterval, setMonthsInterval] = useState<number>(60);
 
   useEffect(() => {
+    let totalPosts : number = 0;
+    let totalLikes : number = 0;
+    let totalShares: number = 0;
+    let totalComment: number = 0;
+
+    const currentDate : Date = new Date();
+    const startDate : Date = new Date();
+    if(monthsInterval < 0) return;
+
+      // Calculate the start date by subtracting `monthsInterval` months from the current date
+    startDate.setMonth(currentDate.getMonth() - monthsInterval);
+    
+    platformShowing.toLowerCase() === "all" ? 
+    Object.values(socialPosts).flat()
+      .filter((item: Posts) => new Date(item.timestamp || "") >= startDate)
+      .forEach((item: Posts) => {
+          totalPosts += 1 //Object.values(socialPosts).flat().length || 0;
+          totalLikes += Number(item.like_count) || 0;
+          totalShares += Number(item.shares_count) || 0;
+          totalComment += Number(item.comments_count) || 0;
+      })
+    : 
+    (socialPosts[platformShowing] || [])
+    .filter((item: Posts) => new Date(item.timestamp || "") >= startDate)
+    .forEach((item: Posts) => {
+        totalPosts += 1 //Object.values(socialPosts[platformShowing]).length || 0;
+        totalLikes += Number(item.like_count) || 0;
+        totalShares += Number(item.shares_count) || 0;
+        totalComment += Number(item.comments_count) || 0;
+    });
+
+    //calculate previous interval months starting from startDate
+    let totalPrevPosts : number = 0;
+    let totalPrevLikes : number = 0;
+    let totalPrevShares: number = 0;
+    let totalPrevComment: number = 0;
+
+    const prevStartDate : Date = new Date();
+    const prevEndDate : Date = new Date();
+
+    prevStartDate.setMonth(startDate.getMonth() - monthsInterval); // Previous interval start date
+    prevEndDate.setMonth(startDate.getMonth()); // Previous interval end date (which is the same as the startDate)
+
+    // Now calculate the metrics for the previous interval
+    platformShowing.toLowerCase() === "all" ? 
+      Object.values(socialPosts).flat()
+        .filter((item: Posts) => {
+            const postDate = new Date(item.timestamp || "");
+            return postDate >= prevStartDate && postDate < prevEndDate;
+        })
+        .forEach((item: Posts) => {
+            totalPrevPosts += 1;
+            totalPrevLikes += Number(item.like_count) || 0;
+            totalPrevShares += Number(item.shares_count) || 0;
+            totalPrevComment += Number(item.comments_count) || 0;
+        })
+      : 
+      (socialPosts[platformShowing] || [])
+        .filter((item: Posts) => {
+            const postDate = new Date(item.timestamp || "");
+            return postDate >= prevStartDate && postDate < prevEndDate;
+        })
+        .forEach((item: Posts) => {
+            totalPrevPosts += 1;
+            totalPrevLikes += Number(item.like_count) || 0;
+            totalPrevShares += Number(item.shares_count) || 0;
+            totalPrevComment += Number(item.comments_count) || 0;
+        });
+
+
+        
+
+    
+
+
     setAnalytics([
       {
         title: "Total post",
         icon: <FaRegNoteSticky style={{backgroundColor: "#ff20ec27"}} className="social_feature_card_icons" color="#ff20ec" size={25} />,
-        period: "Month",
+        period: monthsInterval === 1 ? `Month` : `${monthsInterval} Months`,
         value: {
-          current: "2543",
-          prev: "1997",
+          current: totalPosts,
+          prev: totalPrevPosts,
         }
       },
       {
-        title: "Average Like",
+        title: "Total Like",
         icon: <FiThumbsUp style={{backgroundColor: "#0245ff25"}} className="social_feature_card_icons" color="blue" size={25} />,
-        period: "Month",
+        period: monthsInterval === 1 ? `Month` : `${monthsInterval} Months`,
         value: {
-          current: "244076",
-          prev: "248890",
+          current: Math.round(totalLikes / 1),
+          prev: Math.round(totalPrevLikes / 1),
         }
       },
       {
-        title: "Average comment",
+        title: "Total comment",
         icon: <BiCommentDetail style={{backgroundColor: "#02ff0f25"}} className="social_feature_card_icons" color="green" size={25} />,
-        period: "Month",
+        period: monthsInterval === 1 ? `Month` : `${monthsInterval} Months`,
         value: {
-          current: "188086",
-          prev: "170679",
+          current: Math.round(totalComment / 1),
+          prev: Math.round(totalPrevComment / 1),
         }
       },
       {
         title: "Average Share",
         icon: <BiShare style={{backgroundColor: "#ff4b1525"}} className="social_feature_card_icons" color="#FA5A2A" size={25} />,
-        period: "Month",
+        period: monthsInterval === 1 ? `Month` : `${monthsInterval} Months`,
         value: {
-          current: "58089",
-          prev: "48484",
+          current: Math.round(totalShares / monthsInterval),
+          prev: Math.round(totalPrevShares / monthsInterval),
         }
       }
     ])
-  }, []);
+  }, [platformShowing, monthsInterval, socialPosts]);
 
 
   useEffect(() => {
-    setRecentPost([
+    let post : Posts[] = [];
+    if(platformShowing.toLowerCase() !== "all" && (!socialPosts[platformShowing]  || socialPosts[platformShowing].length === 0)) return setRecentPost([]);
+
+    platformShowing.toLowerCase() === "all" ?
+    post = sortPostsByTimestamp(Object.values(socialPosts).flat()).slice(0, 4)
+    :
+    post = sortPostsByTimestamp(socialPosts[platformShowing]).slice(0, 4);
+
+
+    setRecentPost(post);
+
+
+   /* setRecentPost([
     {
       thumbnail: "https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_3840,h_2880,g_auto/f_auto/q_auto/v1/images/mountain?_a=BAVAZGBy0",
       title: "Most visited place in bangladesh",
@@ -111,28 +202,22 @@ const SocialHome : React.FC = ({}) => {
       date: "24, Tue Sep",
       platform: "x"
     },  
-  ]);
-  }, [])
+  ]);*/
+  }, [socialPosts, platformShowing])
 
+  //const lastPath = window.location.pathname.split('/').filter(Boolean).pop();
 
   return (
     <div className="social_home_container">
         <div className="publish_header_content_container">
             <div className="publish_header_left_container">
                 <FaWandMagicSparkles size={25} className='publish_header_left_icon' />
-                <span className='publish_header_left_text'>Board</span>
-            </div>
-
-            <div className="social_home_header_path">
-              <span className="social_home_header_path_base" onClick={() => {
-                if(platformShowing  === "All") return;
-                document.querySelector(".loading-container")?.classList.add("gen_active");
-                setTimeout(() => {
-                  setPlatformShowing("All")
-                  document.querySelector(".loading-container")?.classList.remove("gen_active");
-                }, 1000);
-              }}>Dashboard/</span>
-              <span className="social_home_header_path_current">{platformShowing.charAt(0).toUpperCase() + platformShowing.slice(1)}</span>
+                <span onClick={() => {
+                    if(platformShowing === "All") return;
+                    setPlatformShowing("All");
+                }} className="social_analyse_header_left_path_root">Dashboard</span>
+                <span className="social_analyse_header_left_path_root">/</span>
+                <span className="social_analyse_header_left_path_root_absolute">{platformShowing.charAt(0).toUpperCase() + platformShowing.slice(1)}</span>
             </div>
 
 
@@ -176,13 +261,74 @@ const SocialHome : React.FC = ({}) => {
         <div className="social_home_content_visualization_container">
           <SocialGraphVisuals
            title="Followers"
-           icon={<RiGroupLine color="green" size={12} />}
+           icon={<RiGroupLine color="#fa5a2a" size={12} />}
            data={{}}
+           option={{
+            graph:{
+              barColors: ["#FA5a2a"],
+              borderRadius: 10
+            },
+            body:{
+              accent: "#fa5a2a",
+              backgroundAccent: "#fa5a2a27",
+              width: "50"
+            },
+            font: {
+              family: 'Arial',  // Change to your desired font
+              size: 14,         // Adjust font size
+              weight: 'bold',   // 'normal', 'bold', 'bolder', etc.
+              style: 'italic'   // 'normal', 'italic', 'oblique'
+            },
+            x: {
+              font: {
+                family: 'cursive', // X-axis font
+                size: 12
+              },
+            },
+            y: {
+              font: {
+                family: 'cursive', // Y-axis font
+                size: 12
+              },
+            }
+
+           }}
            />
           <SocialGraphVisuals
            title="Engagements"
-           icon={<PiPlugsConnectedDuotone color="green" size={12} />}
+           icon={<PiPlugsConnectedDuotone color="#fa5a2a" size={12} />}
            data={{}}
+           option={{
+            graph:{
+              barColors: ["#FA5a2a"],
+              borderRadius: 10,
+              barThickness: 20
+            },
+            body:{
+              accent: "#fa5a2a",
+              backgroundAccent: "#fa5a2a27",
+              width: "50"
+            },
+            font: {
+              family: 'Arial',  // Change to your desired font
+              size: 14,         // Adjust font size
+              weight: 'bold',   // 'normal', 'bold', 'bolder', etc.
+              style: 'italic'   // 'normal', 'italic', 'oblique'
+            },
+            x: {
+              font: {
+                family: 'cursive', // X-axis font
+                size: 12
+              },
+            },
+            y: {
+              font: {
+                family: 'cursive', // Y-axis font
+                size: 12
+              },
+            }
+
+           }}
            />
         </div>
 

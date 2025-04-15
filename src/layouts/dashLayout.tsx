@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import DashNavbar from "../components/dash_navbar";
 import { useEffect } from "react";
 import { isLoggedIn, startSession } from "../constant";
-import { WebSocketProvider } from "./../constant/websocket";
+import { WebSocketProvider } from "../constant/provider";
 import "./css/dashlay.css";
 
 const DashLayout = () => {
@@ -37,7 +37,7 @@ const DashLayout = () => {
             .then((isLogged: any) => {
                 if (!isLogged) {
                     console.log("not-logged in going to auth")
-                    //navigate("/auth");
+                    navigate("/auth");
                     document.querySelector(".loading-container")?.classList.remove("gen_active");
                 }else{
                     console.log("logged in staying...")
@@ -47,11 +47,11 @@ const DashLayout = () => {
             .catch((err) => {
                 console.log('session_check_error: ', err);
                 document.querySelector(".loading-container")?.classList.remove("gen_active");
-                //navigate("/auth");
+                navigate("/auth");
             })
         } catch (err) {
             console.log("Auth error:", err);
-            //navigate("/auth");
+            navigate("/auth");
             document.querySelector(".loading-container")?.classList.remove("gen_active");
         }
 

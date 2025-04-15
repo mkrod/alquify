@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { useWebSocket } from '../constant/websocket';
+import { useWebSocket } from '../constant/provider';
 import "./css/settings_layout.css";
 
 const SettingsLayout = () => {

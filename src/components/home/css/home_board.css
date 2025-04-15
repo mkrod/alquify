@@ -1,0 +1,91 @@
+.dash_home_board_container{
+    position: relative;
+    height: fit-content;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.board_content_container_ui {
+    flex: 0 0 100%;
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.5s ease-in-out;
+    display: flex;
+    flex-direction: row;
+}
+
+.board_content_container_left{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: smaller;
+    width: 70%;
+    padding: 25px 30px;
+}
+
+.board_content_container_left_title{
+    font-size: larger;
+    font-weight: bolder;
+    font-family: Quicksand,sans-serif;
+}
+
+.board_content_container_left_subtitle{
+    font-family: "space mono", sans-serif;
+    font-weight: 600;
+    font-size: smaller;
+}
+
+.board_content_left_try_or_navigate{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    font-size: x-small;
+    width: fit-content;
+    padding: 5px 15px;
+    cursor: pointer;
+    border: 0.5px solid transparent;
+    border-radius: 5px;
+    margin-top: auto;
+}
+
+.dash_home_board_carousel_indicators {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.dash_home_board_carousel_indicator {
+    width: 7px;
+    height: 7px;
+    background-color: var(--accent3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.dash_home_board_active_carousel {
+    background-color: var(--accent1);
+}
+
+.prev_button, .next_button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.prev_button { left: 10px; }
+.next_button { right: 10px; }

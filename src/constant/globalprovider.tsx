@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
+/*import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { isLoggedIn, LogOut } from '.';
 
 interface GlobalContext {
@@ -41,3 +41,4 @@ const globalprovider : React.FC<Prop> = ({ children }) => {
 }
 
 export default globalprovider
+*/

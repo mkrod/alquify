@@ -25,6 +25,7 @@ const DashNavbar = () => {
           document.documentElement.style.setProperty('--background-color', '#ffffff');
           document.documentElement.style.setProperty('--fade-background-color', '#24242443');
           document.documentElement.style.setProperty('--tab-background', '#dddddd');
+          document.documentElement.style.setProperty('--text-fade-color', '#3a3a3ab7');
           document.documentElement.style.setProperty('--color', '#242424');
 
           document.querySelector('.d_nav_bottom_bar_down_light_container')?.classList.add('active_theme');
@@ -36,6 +37,7 @@ const DashNavbar = () => {
           document.documentElement.style.setProperty('--fade-background-color', '#ffffff43');
           document.documentElement.style.setProperty('--tab-background', '#1a1a1a');
           document.documentElement.style.setProperty('--color', '#ffffff');
+          document.documentElement.style.setProperty('--text-fade-color', '#bdbdbdbd');
 
           document.querySelector('.d_nav_bottom_bar_down_dark_container')?.classList.add('active_theme');
           document.querySelector('.d_nav_bottom_bar_down_light_container')?.classList.remove('active_theme');
@@ -253,7 +255,7 @@ const DashNavbar = () => {
             </div>
             <div className='d_nav_bottom_bar_top_up_name_email'>
               <span className='d_nav_bottom_bar_top_up_name'>Unknown Organi...</span>
-              <span className='d_nav_bottom_bar_top_up_email'>{ email }</span>
+              <span className='d_nav_bottom_bar_top_up_email'>{ email && email.length <=  15 ? email :  email?.slice(0, 15) + "..." }</span>
             </div>
             <div className='d_nav_bottom_bar_top_up_dp_current_plan_container'>
               <div className='d_nav_bottom_bar_top_up_dp_current_plan'>Free</div>

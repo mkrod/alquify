@@ -1,0 +1,64 @@
+.social_analyse_home_container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+}
+
+.social_analyse_header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.social_analyse_header_left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.social_analyse_header_left_path_root{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: var(--text-fade-color);
+    font-size: large;
+    cursor: pointer;
+}
+
+.social_analyse_header_left_path_root_absolute{
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    color: var(--color);
+    font-size: large;
+    cursor: pointer;
+}
+
+.social_analyse_header_right{
+    background-color: #fa5a2a27;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.social_analyse_content_one{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 280px;
+    gap: 15px;
+}
+
+.social_analyse_content_two{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    min-height: 280px;
+    gap: 15px;
+}

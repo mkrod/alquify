@@ -5,19 +5,23 @@
     bottom: 0;
     right: 0;
     background-color: var(--fade-background-color);
-    display: none;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 5px;
     transition: ease-in-out .375;
     animation: Move .5s infinite linear;
-    z-index: 10000;
+    z-index: 100001;
     cursor: not-allowed;
+    opacity: 0;
+    scale: 0;
+    transition: opacity ease-in-out .2s;
 }
 
 .loading-container.gen_active{
-    display: flex;
+    scale: 1;
+    opacity: 1;
 }
 
 .fidget-spinner-1{

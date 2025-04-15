@@ -1,0 +1,115 @@
+.publish_content_preview_card_container{
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    position: relative;
+}
+
+.publish_content_preview_image_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.publish_content_preview_image{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    height: auto;
+    width: auto;
+}
+
+.publish_content_preview_video_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.publish_content_preview_video_thumbnail{
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+
+
+.publish_content_preview_caption_container{
+    position: absolute;
+    bottom: 0;
+    max-height: 250px;
+    overflow: auto;
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+
+
+.publish_content_preview_carousel_album_container {
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    position: relative;
+    scroll-snap-type: x mandatory;  /* 👈 required for snapping */
+    -webkit-overflow-scrolling: touch; /* 👈 smooth scroll on iOS */
+}
+.publish_content_preview_carousel_album_container::-webkit-scrollbar{
+    display: none;
+}
+
+.publish_content_preview_carousel_item_container {
+    flex: 0 0 100%;  /* 👈 each child takes 100% of parent width */
+    scroll-snap-align: start; /* 👈 snap to start of each child */
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.publish_content_preview_carousel_scroll_hint{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.publish_content_preview_carousel_scroll_hint_arrow_animation{
+    animation: moveRight 1.5s infinite ease-in-out;
+}
+
+
+
+@keyframes moveRight {
+    0% { transform: translateX(0); opacity: 0.5; }
+    50% { transform: translateX(6px); opacity: 1; }
+    100% { transform: translateX(0); opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

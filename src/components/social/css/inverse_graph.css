@@ -1,0 +1,54 @@
+.inverse_graph_container{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 5px var(--tab-background);
+    border: 0.5px solid var(--tab-background);
+    padding: 0 15px;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.inverse_graph_header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color);
+    height: 45px;
+    border-bottom: 0.5px solid var(--tab-background);
+}
+
+.inverse_graph_left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.inverse_graph_left_icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.inverse_graph_left_title{
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color);
+}
+
+.inverse_graph_body{
+    height: calc(100% - 50px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inverse_graph_body._flip_inverse_graph{
+    transform: rotateY(180deg);
+}

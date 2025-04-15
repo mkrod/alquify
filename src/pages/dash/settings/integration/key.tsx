@@ -1,6 +1,6 @@
 import { appLogoUri } from '../../../../constant';
 import { FaAngleDown, FaAngleUp, FaCopy } from 'react-icons/fa6';
-import { useWebSocket } from '../../../../constant/websocket';
+import { useWebSocket } from '../../../../constant/provider';
 
 
 

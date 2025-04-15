@@ -240,6 +240,7 @@
     box-shadow: 0 0 5px 0 #ffffff60;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.1));
     z-index: 1;
+    padding: 2px;
 }
 .social_home_navbar_link_item_settings_icon{
     position: absolute;

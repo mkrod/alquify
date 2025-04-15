@@ -11,13 +11,54 @@ interface Props {
     title: string;
     icon: React.ReactNode
     data: Record<string, any>;
+    option?:  {
+        font?: {
+            family?: string;
+            weight?: any;
+            size?: number;
+            style?:  any;
+        }
+        color?: string;
+        x?: {
+            font?: {
+                family?: string;
+                weight?: any;
+                size?: number;
+                style?:  any;
+            },
+            color?: string;
+        }
+        y?: {
+            font?: {
+                family?: string;
+                weight?: any;
+                size?: number;
+                style?:  any;
+            },
+            color?: string;
+        },
+        graph?:  {
+            style?: "bar" | "line" |  "radar" | "pie";
+            color?:  string;
+            borderColor?: [string];
+            borderRadius?: number;
+            barColors?: [string];
+            barThickness?: number;
+        }
+        body?: {
+            accent?: string;
+            backgroundAccent?: string;
+            width?: string;
+        }
+
+
+    }
 }
 
-const SocialGraphVisuals : React.FC<Props> = ({title, icon, data}) => {
+const SocialGraphVisuals : React.FC<Props> = ({title, icon, data, option}) => {
 
-    const style = getComputedStyle(document.body);
-    const graphLabelColor = style.getPropertyValue('--text-fade-color').trim();
-
+    //const style = getComputedStyle(document.body);
+    //const graphLabelColor = style.getPropertyValue('--text-fade-color').trim();
 
 
     const [period, setPeriod] = useState<any>("Jan");
@@ -30,18 +71,25 @@ const SocialGraphVisuals : React.FC<Props> = ({title, icon, data}) => {
         label: string;
         count: number;
     }
-    const [votes, setVotes] = useState<Votes[]>([
-        { label: 'Jul', count: 345 },
-        { label: 'Aug', count: 234 },
-        { label: 'Sep', count: 340 },
-        { label: 'Oct', count: 677 },
-        { label: 'Nov', count: 1433 },
-        { label: 'Dec', count: 532 },
-    ]);
 
-    const labels = votes.map((vote) => vote.label);
+    const [votes, setVotes] = useState<Votes[]>([]);
+
+    const labels = votes?.map((vote) => vote.label);
 
     useEffect(() => {
+        setVotes([
+            { label: 'Jul', count: 345 },
+            { label: 'Aug', count: 234 },
+            { label: 'Sep', count: 340 },
+            { label: 'Oct', count: 677 },
+            { label: 'Nov', count: 1433 },
+            { label: 'Dec', count: 532 },
+        ])
+    }, [])
+
+
+    useEffect(() => {
+        data //
         if (!canvasRef.current) return;
 
         const ctx = canvasRef.current.getContext("2d");
@@ -56,29 +104,33 @@ const SocialGraphVisuals : React.FC<Props> = ({title, icon, data}) => {
 
         // Create new chart instance and store in ref
         chartRef.current = new Chart(canvasRef.current, {
-            type: 'bar',
+            type: option?.graph?.style || 'bar',
             data: {
                 labels: labels,
                 datasets: [
                     {
                         label: "",
-                        data: votes.map((vote) => vote.count),
-                        backgroundColor: "#00fd3777",
-                        borderRadius: 10,
+                        data: votes?.map((vote) => vote.count),
+                        backgroundColor: option?.graph?.barColors,
+                        borderColor: option?.graph?.borderColor,
+                        borderRadius: option?.graph?.borderRadius,
+                        barThickness: option?.graph?.barThickness,
                     },
                 ],
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
-                    legend: {
+                    legend: {display: false,
                         labels: {
                             font: {
-                                family: 'Arial',  // Change to your desired font
-                                size: 14,         // Adjust font size
-                                weight: 'bold',   // 'normal', 'bold', 'bolder', etc.
-                                style: 'italic'   // 'normal', 'italic', 'oblique'
+                                family: option?.font?.family,  // Change to your desired font
+                                size: option?.font?.size,         // Adjust font size
+                                weight: option?.font?.weight,   // 'normal', 'bold', 'bolder', etc.
+                                style: option?.font?.style   // 'normal', 'italic', 'oblique'
                             },
-                            color: 'black'       // Change text color if needed
+                            color: option?.color       // Change text color if needed
                         }
                     }
                 },
@@ -86,10 +138,12 @@ const SocialGraphVisuals : React.FC<Props> = ({title, icon, data}) => {
                     x: {
                         ticks: {
                             font: {
-                                family: 'cursive', // X-axis font
-                                size: 12
+                                family: option?.x?.font?.family, // X-axis font
+                                size: option?.x?.font?.size,
+                                weight: option?.x?.font?.weight,
+                                style: option?.x?.font?.style
                             },
-                            color: graphLabelColor // X-axis label color
+                            color: option?.x?.color // X-axis label color
                         },
                         grid: {
                             display: false // Removes the horizontal grid lines
@@ -98,10 +152,10 @@ const SocialGraphVisuals : React.FC<Props> = ({title, icon, data}) => {
                     y: {
                         ticks: {
                             font: {
-                                family: 'cursive', // Y-axis font
-                                size: 12
+                                family: option?.y?.font?.family, // Y-axis font
+                                size: option?.y?.font?.size
                             },
-                            color: graphLabelColor // Y-axis label color
+                            color: option?.y?.color // Y-axis label color
                         },
                         beginAtZero: true
                     }
@@ -120,19 +174,19 @@ const SocialGraphVisuals : React.FC<Props> = ({title, icon, data}) => {
     
 
   return (
-    <div className='social_graph_visual_container'>
+    <div style={{width: option?.body?.width}} className='social_graph_visual_container'>
         <div className="social_graph_visual_top">
             <div className="social_graph_visual_top_left">
-                <div className="social_graph_visual_top_left_left_icon">{icon}</div>
-                <span className="social_graph_visual_top_left_title">{title}</span>
+                <div style={{ backgroundColor: option?.body?.backgroundAccent}} className="social_graph_visual_top_left_left_icon">{icon}</div>
+                <span style={{ color: option?.body?.accent}} className="social_graph_visual_top_left_title">{title}</span>
             </div>
             <div className="social_graph_visual_top_right"onClick={() => setIsOpen(!isOpen)}>
-                <div className="socal_graph_visual_top_right_dropdown">
-                    <span className="socal_graph_visual_top_right_dropdown_text">{period}</span>
-                    <FaAngleDown size={15} color='' className='' />
+                <div style={{ backgroundColor: option?.body?.backgroundAccent}} className="socal_graph_visual_top_right_dropdown">
+                    <span style={{color: option?.body?.accent}} className="socal_graph_visual_top_right_dropdown_text">{period}</span>
+                    <FaAngleDown size={15} color={option?.body?.accent} className='' />
                 </div>
 
-                <div className={`socal_graph_visual_top_right_dropdown_options_container ${isOpen && "open_followers_period_option"}`}>
+                <div style={{ backgroundColor: option?.body?.backgroundAccent}} className={`socal_graph_visual_top_right_dropdown_options_container ${isOpen && "open_followers_period_option"}`}>
                     <div className="socal_graph_visual_top_right_dropdown_option" onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => setPeriod((e.target as HTMLDivElement).textContent)}><LuCalendar1 color='green' /> Nov</div>
                     <div className="socal_graph_visual_top_right_dropdown_option" onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => setPeriod((e.target as HTMLDivElement).textContent)}><LuCalendar1 color='green' /> Dec</div>
                 </div>

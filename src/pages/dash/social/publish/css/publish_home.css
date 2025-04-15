@@ -36,6 +36,12 @@
     padding: 10px 20px;
     background-color: transparent;
     font-family: Poppins, sans-serif;
+    background-color: var(--background-color);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 
 .publish_navbar_link{
@@ -57,6 +63,8 @@
 }
 
 .publish_content_container{
-    padding: 0 20px;
+    padding: 5px 10px;
     color: var(--color);
+    width: 100%;
+    height: calc(100vh - 210px); /* Adjust height dynamically based on viewport */
 }

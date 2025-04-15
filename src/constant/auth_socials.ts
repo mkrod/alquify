@@ -1,4 +1,4 @@
-import { FBAppID, GoogleAuthClientID, IGClient, LinkedInClient, server, TiktokClient } from ".";
+import { FBAppID, GoogleAuthClientID, IGClient, LinkedInClient, server } from ".";
 
 
 // Fetch Facebook User Details
@@ -36,11 +36,23 @@ async function getTwitterUserDetails(token: string) {
 }
 
 // Fetch Instagram User Details
-async function getInstagramUserDetails(token: string) {
+export async function getIGIDWithFbPageId(id: string) {
   try {
-    const response = await fetch(`https://graph.instagram.com/me?fields=id,username,account_type,profile_picture_url&access_token=${token}`);
+    const response = await fetch(`${server}/get-id-from-fb-page?page_id=${id}`, {credentials: "include"});
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error?.message || "Failed to fetch Instagram ID from Facebook Page ID");
+    return data;
+  }catch(error){
+    console.error("Instagram API Error:", error);
+    return null;
+  }
+}
+async function getInstagramUserDetails(token: string, account_id: string) {
+  try {
+    const response = await fetch(`https://graph.facebook.com/${account_id}?fields=id,name,profile_picture_url,username&access_token=${token}`);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error?.message || "Failed to fetch Instagram details");
+    console.log("Instagram Data: ", data);
     return data;
   } catch (error) {
     console.error("Instagram API Error:", error);
@@ -87,7 +99,7 @@ async function getGoogleUserDetails(token: string) {
 // Fetch TikTok User Details
 async function getTikTokUserDetails(token: string) {
   try {
-    const response = await fetch("https://open.tiktokapis.com/v2/user/info/", {
+    const response = await fetch("https://open.tiktokapis.com/v2/user/info/?fields=open_id,union_id,avatar_url,display_name", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -110,7 +122,7 @@ async function getTikTokUserDetails(token: string) {
 export const authorizeFB = () => { 
   const scope  = 'public_profile,email';
   //const scope = 'pages_show_list,public_profile,pages_manage_posts,pages_read_engagement,pages_manage_metadata,pages_read_user_content,pages_manage_ads,pages_manage_engagement';
-  const response_type= 'code';
+  const response_type = 'code';
   const client_id = FBAppID;
   const redirect_uri = `${server}/auth/facebook/callback`;
   const url = `https://www.facebook.com/v17.0/dialog/oauth?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=${response_type}`;
@@ -118,29 +130,19 @@ export const authorizeFB = () => {
   window.location.href = url;
 };
 
-export const authorizeInstagram = () => { 
-  const scope = 'user_profile,user_media'; 
-  const response_type = 'code';
+export const authorizeeInstagram = () => { 
+  const scope = 'instagram_basic,pages_show_list,instagram_manage_insights,instagram_content_publish'; 
+  const response_type = 'token';
   const client_id = IGClient;
   const redirect_uri = `${server}/auth/instagram/callback`;
-  const url = `https://api.instagram.com/oauth/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=${response_type}`;
+  const url = `https://www.facebook.com/v14.0/dialog/oauth?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=${response_type}`;
 
   window.location.href = url;
 };
 
 
-export const authorizeTikTok = () => { 
-  alert("Tiktok imppp");
-
-  const scope = 'user.info.basic,user.info.profile,video.upload'; 
-  const response_type = 'code';
-  const client_key = TiktokClient;  
-  const redirect_uri = encodeURIComponent(`${server}/auth/tiktok/callback`); 
-  const state = encodeURIComponent("random_string_to_prevent_csrf"); 
-
-  const url = `https://www.tiktok.com/auth/authorize/?client_key=${client_key}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=${response_type}&state=${state}`;
-
-  window.location.href = url;
+export const authorizeTikTok = async () => { 
+  window.location.href = `${server}/tiktok/auth`;
 };
 
 
@@ -188,7 +190,7 @@ export const authorizeTwitter = () => {
 //did i appropriately overwrite the user details in the local storage?
 
 export const setUserDetails = async (data: any) => {
-  const { fb_token, x_token, tiktok_token, ig_token, linkedin_token, google_token } = data;
+  const { fb_token, x_token, tiktok_token, ig_token, ig_bus_id, linkedin_token, google_token } = data;
   console.log("Updating user details...:", data);
 
   try {
@@ -232,13 +234,13 @@ export const setUserDetails = async (data: any) => {
     }
 
     // Fetch and update Instagram data
-    if (ig_token && !existingUserData.instagram) {
-      const igData = await getInstagramUserDetails(ig_token);
+    if (ig_token && ig_bus_id && !existingUserData.instagram) {
+      const igData = await getInstagramUserDetails(ig_token, ig_bus_id);
       if (igData?.error) handleTokenError("instagram", "ig_token");
       else if (igData) {
         existingUserData.instagram = {
           username: igData.username,
-          profile_picture: igData.profile_picture_url,
+          picture: igData.profile_picture_url,
           id: igData.id,
         };
       }
@@ -279,7 +281,7 @@ export const setUserDetails = async (data: any) => {
         existingUserData.tiktok = {
           username: tiktokData.username,
           id: tiktokData.open_id,
-          profile_picture: tiktokData.avatar_url,
+          picture: tiktokData.avatar_url,
         };
       }
     }

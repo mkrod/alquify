@@ -2,7 +2,7 @@ import { IoSettingsOutline } from "react-icons/io5"
 import './css/chat_list.css';
 import ChatListMsg from "./chat_list_msg";
 import React, { useEffect, useState } from "react";
-import { useWebSocket } from "../constant/websocket";
+import { useWebSocket } from "../constant/provider";
 import { server } from "../constant";
 import EmptyMsg from "./empty_msg";
 

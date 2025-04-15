@@ -6,9 +6,9 @@ const Logout = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    localStorage.removeItem("userData");
     LogOut()
-    .then(() => { 
+    .then((loggedOut: boolean) => { 
+      if(!loggedOut) return;
       localStorage.clear();
       navigate("/dash")
      })

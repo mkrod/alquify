@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react'
 import  "./css/social_recent_post_card.css";
 import { FaRegNoteSticky } from 'react-icons/fa6';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
+import { Posts } from '../../constant/provider';
+import { extractHashtags } from '../../constant';
 
 type Prop = {
-    data: Record<string, any>[];
+    data: Posts[];
     platformShowing: string;
     cardTitle: string;
 }
 
-const SocialRecentPostCard: React.FC<Prop> = ({ data, platformShowing, cardTitle }) => {
+const SocialRecentPostCard: React.FC<Prop> = ({ data, cardTitle }) => {
 
     
 
@@ -18,23 +20,36 @@ const SocialRecentPostCard: React.FC<Prop> = ({ data, platformShowing, cardTitle
         thumbnail: string;
         title: string;
         date:  string;
-        tags: [string];
+        tags: string[];
     }
     const Card : React.FC<Cards> = ({thumbnail,  title, date, tags}) => {
+        const tags_list : string[] = extractHashtags(title);
+
         return(
             <div className="social_post_card_container">
                 {thumbnail !== "" && <div className="social_post_card_thumbnail_container">
-                    <img src={thumbnail} alt={`${title} thumbnail`} className='social_post_card_thumbnail' />
+                    <img src={thumbnail} alt={`${title.slice(0, 10)} thumbnail`} className='social_post_card_thumbnail' />
                 </div>}
                 {tags && tags.length > 0 && <div className="social_post_card_tags_container">
                     {tags.length > 0 && tags.slice(0, 3).map((item: string, index: number) => (<div key={index} className='social_post_card_tag'>{"#"+item}</div>))}
                 </div> /* render only if there are tag(s)*/}
+                {tags.length === 0 && tags_list.length > 0 && <div className="social_post_card_tags_container">
+                    {tags_list.length > 0 && tags_list.filter((tag) => tag.length < 6).slice(0, 3).map((item: string, index: number) => (<div key={index} className='social_post_card_tag'>{item}</div>))}
+                </div> /* render only if there are tag(s)*/}
                 {title !== "" && <div className="social_post_card_title_container">
-                       {title}
+                       {title.length > 15 ? title.slice(0, 15)  + "..." : title}
                 </div>}
-                {date !== "" && <div className="social_post_card_date_container">{date}</div>}
+                {date !== "" && <div className="social_post_card_date_container">{new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</div>}
             </div>
         );
+    }
+    const Empty = () => {
+
+        return (
+            <div style={{width: "100%", height: "200px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <span style={{fontFamily: "Inconsolata", fontWeight: "bold"}}>No Posts Recently</span>
+            </div>
+        )
     }
 
     const [navigate, setNavigate] = useState<{
@@ -71,15 +86,16 @@ const SocialRecentPostCard: React.FC<Prop> = ({ data, platformShowing, cardTitle
             </div>
         </div>
         <div className="social_recent_post_cards_down">
-        {data.map((item: any, index: number) => (
+        {data.length > 0 && data.map((item: Posts, index: number) => (
             <Card
             key={index}
-            thumbnail={item.thumbnail}
-            title={item.title}
-            date={item.date}
-            tags={item.tags}
+            thumbnail={item.thumbnail_url ?? item.media_url ?? ""}
+            title={item.title || ""}
+            date={item.timestamp || ""}
+            tags={item.tags || []}
             />
         ))}
+        {data.length === 0 && <Empty />}
         </div>
     </div>
   )

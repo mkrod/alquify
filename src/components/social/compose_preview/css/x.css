@@ -1,0 +1,107 @@
+.compose_x_preview_post_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.compose_x_preview_post_header{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.compose_x_preview_post_header_left{
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 5px var(--tab-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.compose_x_preview_post_header_left_img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.compose_x_preview_post_header_right{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    height: 100%;
+    margin-left: 20px;
+    gap: 5px;
+}
+
+.compose_x_preview_post_header_name{
+    font-size: 15px;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    color: var(--color);
+}
+
+.compose_x_preview_post_header_username{
+    color: var(--text-fade-color);
+    font-size: 12px;
+}
+
+.compose_x_preview_post_body_caption{
+    font-size: 12px;
+    padding: 10px 10px 10px 45px;
+    font-weight: 500;
+    color: var(--color);
+    word-wrap: break-word;
+}
+
+
+
+
+.compose_x_preview_post_body_medias_container{
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    padding: 10px 10px 10px 45px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.compose_x_preview_post_body_medias_container.x_media_children_3{
+    display: flex;
+    flex-direction: column;
+}
+
+.compose_x_preview_post_body_media_container{
+    border: 1px solid var(--tab-background);
+    flex: 1 1 50%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.compose_x_preview_post_body_media{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.compose_x_preview_post_body_medias_container.x_media_children_3 .compose_x_preview_post_body_media_container.x_media_child_1{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.compose_x_preview_post_body_medias_container.x_media_children_3 .compose_x_preview_post_body_media_container.x_media_child_2{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.compose_x_preview_post_body_medias_container.x_media_children_3 .compose_x_preview_post_body_media_container.x_media_child_3{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

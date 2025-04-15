@@ -1,0 +1,103 @@
+.compose_linkedin_post_preview_container{
+    display: flex;
+    flex-direction: column;
+    border: 0.5px solid var(--tab-background);
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.compose_linkedin_post_preview_header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.compose_linkedin_post_preview_header_left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.compose_linkedin_post_preview_header_left_img{
+    height: 100%;
+    width: 100%;
+}
+
+.compose_linkedin_post_preview_header_middle{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.compose_linkedin_post_preview_header_middle_name{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color);
+}
+
+.compose_linkedin_post_preview_header_left_time_public{
+    color: var(--text-fade-color);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+}
+
+.compose_linkedin_post_preview_header_right{
+    margin-left: auto;
+}
+
+.compose_linkedin_post_preview_caption_container{
+    font-size: 12px;
+    margin-top: 10px;
+    word-wrap: break-word;
+}
+
+.compose_linkedin_post_preview_media_container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    flex-direction: row;
+}
+
+
+.compose_linkedin_post_preview_image{
+    min-width: 50%;
+    flex: 1 1 50%;
+    border: 0.5px solid var(--tab-background);
+    height: 120px;
+    object-fit: cover;
+}
+
+
+.compose_linkedin_post_preview_media_container.linkedin_post_preview_media_container_children_less_than_three .compose_linkedin_post_preview_image{
+    height: 220px;
+}
+
+.compose_linkedin_post_preview_actions{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.compose_linkedin_post_preview_icon_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.compose_linkedin_post_preview_icon_label{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-fade-color);
+}
+
+
+.compose_linkedin_post_preview_icon{
+    color: var(--text-fade-color);
+}

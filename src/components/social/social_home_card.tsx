@@ -6,15 +6,15 @@ interface Props {
     icon: React.ReactNode;
     period: string;
     value: {
-        current: string;
-        prev: string;
+        current: number;
+        prev: number;
     }
 }
 
 const SocialFeatureCard : React.FC<Props> = ({title, icon, period, value}) => {
 
-    const lastPeriod : number = Number(value.prev);
-    const currentPeriod : number = Number(value.current);
+    const lastPeriod : number = value.prev;
+    const currentPeriod : number = value.current;
     const [subtitle, setSubtitle] = useState<string>("Loading...")
     const [color, setColor] = useState<string>("");
     const [percent, setPercent] = useState<number>(0);
@@ -63,7 +63,7 @@ const SocialFeatureCard : React.FC<Props> = ({title, icon, period, value}) => {
         </div>
 
         <div className="social_feature_card_bottom">
-            <div className="social_feature_card_bottom_top">{formatNumber(Number(value.current))}</div>
+            <div className="social_feature_card_bottom_top">{formatNumber(value.current)}</div>
             <div className="social_feature_card_bottom_down">
                 <div style={{backgroundColor: color, borderColor, color: borderColor}} className="social_feature_card_bottom_down_left">{`${""} ${percent}%`}</div>
                 <div className="social_feature_card_bottom_down_right">{subtitle}</div>
